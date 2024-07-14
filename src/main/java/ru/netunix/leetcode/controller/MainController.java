@@ -19,6 +19,8 @@ public class MainController {
     public Solution solution;
     @Value(value = "classpath:code/242_valid_anagram.txt")
     private Resource validAnagram;
+    @Value(value = "classpath:code/88_merge_sorted_arrays.txt")
+    private Resource mergeSortedArrays;
 
     @Autowired
     public MainController(Solution solution) {
@@ -41,8 +43,11 @@ public class MainController {
         return "task-01";
     }
 
-    @GetMapping("/second")
-    public String showAnswerSecond() {
+    @GetMapping("/mergeSortedArrays")
+    public String showAnswerMergeSortedArrays(Model model) throws IOException {
+        String code = StreamUtils.copyToString(mergeSortedArrays.getInputStream(), Charset.defaultCharset() );
+        model.addAttribute("code",code);
+
         return "task-02";
     }
 }

@@ -1,0 +1,46 @@
+package ru.netunix.leetcode.easy;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+//88. Merge Sorted Array
+public class MergeArrays {
+    public static void main(String[] args) {
+        int[] nums1 = {1, 2, 7, 8, 0, 0, 0};
+        int[] nums2 = {1, 2, 3};
+        int m = 4;
+        int n = 3;
+        merge(nums1, m, nums2, n);
+        System.out.println(Arrays.stream(nums1).boxed().collect(Collectors.toList()) );
+
+    }
+
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        int[] result = new int[m + n];
+        int i = 0;
+        int j = 0;
+        for (int k = 0;
+             k < (n + m);
+             k++) {
+            int minLeft = Integer.MAX_VALUE;
+            if (i < m) {
+                minLeft = nums1[i];
+            }
+            int minRight = Integer.MAX_VALUE;
+            if (j < n) {
+                minRight = nums2[j];
+            }
+            if (minLeft < minRight) {
+                result[k] = minLeft;
+                i++;
+            } else {
+                result[k] = minRight;
+                j++;
+            }
+        }
+        for (int f = 0; f < nums1.length; f++) {
+            nums1[f] = result[f];
+        }
+    }
+}
