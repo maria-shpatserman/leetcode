@@ -3,7 +3,10 @@ package ru.netunix.leetcode.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -34,4 +37,32 @@ public class Solution {
         }
         return mapInput;
     }
+
+    //66 Plus one
+    public int[] plusOne(int[] digits) {
+        List<Integer> list = new ArrayList<>();
+        int term = 1;
+        for (int i = digits.length - 1; i >= 0; i--) {
+            int resultInt = digits[i] + term;
+            if (resultInt > 9) {
+                list.add(0);
+                term =1;
+            } else {
+                list.add(resultInt);
+                term =0;
+            }
+        }
+        if (term ==1){
+            list.add(term);
+        }
+        int[] result = new int[list.size()];
+        for (int i=0;i<result.length ;i++){
+            result[i] = list.get(list.size()-i-1);
+
+        }
+        return result;
+    }
+
+
+
 }

@@ -21,6 +21,8 @@ public class MainController {
     private Resource validAnagram;
     @Value(value = "classpath:code/88_merge_sorted_arrays.txt")
     private Resource mergeSortedArrays;
+    @Value(value = "classpath:code/66_plus_one.txt")
+    private Resource plusOne;
 
     @Autowired
     public MainController(Solution solution) {
@@ -37,17 +39,25 @@ public class MainController {
         String s = "anagram";
         String t = "nagaram";
         Boolean anagram = solution.isAnagram(s, t);
-        log.info("isAnagram for {}, {} result {}",s,t,anagram);
-        String code = StreamUtils.copyToString(validAnagram.getInputStream(), Charset.defaultCharset() );
-        model.addAttribute("code",code);
+        log.info("isAnagram for {}, {} result {}", s, t, anagram);
+        String code = StreamUtils.copyToString(validAnagram.getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
         return "task-01";
     }
 
     @GetMapping("/mergeSortedArrays")
     public String showAnswerMergeSortedArrays(Model model) throws IOException {
-        String code = StreamUtils.copyToString(mergeSortedArrays.getInputStream(), Charset.defaultCharset() );
-        model.addAttribute("code",code);
+        String code = StreamUtils.copyToString(mergeSortedArrays.getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
 
         return "task-02";
+    }
+
+    @GetMapping("/plusOne")
+    public String showAnswerPlusOne(Model model) throws IOException {
+        String code = StreamUtils.copyToString(plusOne.getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+
+        return "task-03";
     }
 }
