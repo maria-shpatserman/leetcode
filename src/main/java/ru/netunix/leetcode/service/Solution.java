@@ -46,23 +46,36 @@ public class Solution {
             int resultInt = digits[i] + term;
             if (resultInt > 9) {
                 list.add(0);
-                term =1;
+                term = 1;
             } else {
                 list.add(resultInt);
-                term =0;
+                term = 0;
             }
         }
-        if (term ==1){
+        if (term == 1) {
             list.add(term);
         }
         int[] result = new int[list.size()];
-        for (int i=0;i<result.length ;i++){
-            result[i] = list.get(list.size()-i-1);
+        for (int i = 0; i < result.length; i++) {
+            result[i] = list.get(list.size() - i - 1);
 
         }
         return result;
     }
 
+    public int mySqrt(int x) {
+        int result = 1;
+        while (true) {
+            Long twice = getDouble(result);
+            if (twice > x) break;
+            result = result + 1;
+        }
+        return result - 1;
+    }
+
+    public Long getDouble(long x) {
+        return  (x * x);
+    }
 
 
 }

@@ -1,0 +1,15 @@
+class Solution {
+   public int mySqrt(int x) {
+        int result = 1;
+        while (true) {
+            Long twice = getDouble(result);
+            if (twice > x) break;
+            result = result + 1;
+        }
+        return result - 1;
+    }
+
+    public Long getDouble(long x) {
+        return  (x * x);
+    }
+}

@@ -23,6 +23,8 @@ public class MainController {
     private Resource mergeSortedArrays;
     @Value(value = "classpath:code/66_plus_one.txt")
     private Resource plusOne;
+    @Value(value = "classpath:code/69_sqrt.txt")
+    private Resource sqrtX;
 
     @Autowired
     public MainController(Solution solution) {
@@ -59,5 +61,12 @@ public class MainController {
         model.addAttribute("code", code);
 
         return "task-03";
+    }
+    @GetMapping("/sqrtX")
+    public String showSqrtX(Model model) throws IOException {
+        String code = StreamUtils.copyToString(sqrtX.getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+
+        return "task-04";
     }
 }
