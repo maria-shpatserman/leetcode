@@ -2,6 +2,7 @@ package ru.netunix.leetcode.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.netunix.leetcode.util.ListNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,7 +75,33 @@ public class Solution {
     }
 
     public Long getDouble(long x) {
-        return  (x * x);
+        return (x * x);
+    }
+
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode current = head;
+        if (current == null) return head;
+        ListNode next = current.getNext();
+        if (isLast(current)) return current;
+        while (!isLast(current)) {
+            ListNode nextPlusOne = next.getNext();
+            if (current.getVal() == next.getVal()) {
+                current.setNext(nextPlusOne);
+                next = nextPlusOne;
+            } else {
+                current = next;
+                next = next.getNext();
+            }
+
+        }
+
+
+        return head;
+
+    }
+
+    boolean isLast(ListNode current) {
+        return current.getNext() == null;
     }
 
 

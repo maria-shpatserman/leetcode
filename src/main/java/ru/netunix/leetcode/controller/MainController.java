@@ -25,6 +25,8 @@ public class MainController {
     private Resource plusOne;
     @Value(value = "classpath:code/69_sqrt.txt")
     private Resource sqrtX;
+    @Value(value = "classpath:code/83_remove_duplicates_from_sorted_list.txt")
+    private Resource rmvDuplicates;
 
     @Autowired
     public MainController(Solution solution) {
@@ -68,5 +70,12 @@ public class MainController {
         model.addAttribute("code", code);
 
         return "task-04";
+    }
+    @GetMapping("/removeDuplicatesSortedList")
+    public String showRemoveDuplicates(Model model) throws IOException {
+        String code = StreamUtils.copyToString(rmvDuplicates.getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+
+        return "task-05";
     }
 }
