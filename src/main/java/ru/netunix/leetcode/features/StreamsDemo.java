@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,8 +44,7 @@ public class StreamsDemo {
 //
         Person p1 = Person.builder()
                 .firstName("Larry")
-                .lastName("Woll")
-                .books(Arrays.asList(
+                .lastName("Woll")               .books(Arrays.asList(
                         Book.builder().name("mary").price(10).build(),
                         Book.builder().name("ozon").price(100).build()))
                 .build();
