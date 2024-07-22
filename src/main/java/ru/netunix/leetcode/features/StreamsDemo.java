@@ -44,7 +44,7 @@ public class StreamsDemo {
 //
         Person p1 = Person.builder()
                 .firstName("Larry")
-                .lastName("Woll")               .books(Arrays.asList(
+                .lastName("Boll")               .books(Arrays.asList(
                         Book.builder().name("mary").price(10).build(),
                         Book.builder().name("ozon").price(100).build()))
                 .build();
@@ -86,6 +86,13 @@ public class StreamsDemo {
                 })
                 .collect(Collectors.toList());
         System.out.println(collected4);
+
+        //---------------------
+        Integer summ = listBooks.stream().filter(book -> book.getName().startsWith("m"))
+                .map(book -> book.getPrice())
+                .reduce(0, (a, b) -> a + b);
+        System.out.println(summ);
+
 
     }
 }
