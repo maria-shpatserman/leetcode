@@ -1,0 +1,48 @@
+class Solution {
+   public boolean containsNearbyDuplicate(int[] nums, int k) {
+        if (nums.length == 0) return false;
+        if (nums.length == 1) return false;
+        Map<Integer, List<Integer>> values = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (values.containsKey(nums[i])) {
+                values.get(nums[i]).add(i);
+
+            } else {
+                values.put(nums[i], new ArrayList<>(Arrays.asList(i)));
+            }
+        }
+        List<Map.Entry<Integer, List<Integer>>> collected = values.entrySet().stream().filter((entry) ->
+                entry.getValue().size() > 1
+        ).collect(Collectors.toList());
+        boolean result = false;
+        for (Map.Entry entry : collected) {
+            List<Integer> indexes = (List<Integer>) entry.getValue();
+            int startIndex= 0;
+            int leftIndex = indexes.get(startIndex);
+            for (int i = startIndex + 1; i < indexes.size(); i++) {
+                result = isAvailableNearbyDuplicate(i, leftIndex, k, indexes);
+                if (result) return result;
+                else {
+                    startIndex = i;
+                    leftIndex = indexes.get(startIndex);
+
+                }
+            }
+        }
+        return result;
+
+    }
+
+    boolean isAvailableNearbyDuplicate(int startIndex, int leftIndex, int desiredValue, List<Integer> indexes) {
+        boolean result = false;
+
+        for (int i = startIndex; i < indexes.size(); i++) {
+            if ((indexes.get(i) - leftIndex <= desiredValue)) {
+                return true;
+            }
+        }
+
+        return result;
+    }
+
+}
