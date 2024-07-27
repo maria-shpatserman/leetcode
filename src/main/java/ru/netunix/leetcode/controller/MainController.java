@@ -29,6 +29,8 @@ public class MainController {
     private Resource rmvDuplicates;
     @Value(value = "classpath:code/169_majority_element.txt")
     private Resource mjrElement;
+    @Value(value = "classpath:code/219_contain_duplicates_ii.txt")
+    private Resource containsDuplicates2;
 
     @Autowired
     public MainController(Solution solution) {
@@ -86,6 +88,14 @@ public class MainController {
         model.addAttribute("code", code);
 
         return "task-06";
+
+    }
+    @GetMapping("/containsDuplicateSecond")
+    public String getContainsDuplicateSecond(Model model) throws IOException {
+        String code = StreamUtils.copyToString(containsDuplicates2.getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+
+        return "task-07";
 
     }
 }
