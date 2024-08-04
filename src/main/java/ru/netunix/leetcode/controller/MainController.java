@@ -31,6 +31,8 @@ public class MainController {
     private Resource mjrElement;
     @Value(value = "classpath:code/219_contain_duplicates_ii.txt")
     private Resource containsDuplicates2;
+    @Value(value = "classpath:code/2469_convert_the_temperature.txt")
+    private Resource convertTemperature;
 
     @Autowired
     public MainController(Solution solution) {
@@ -97,5 +99,12 @@ public class MainController {
 
         return "task-07";
 
+    }
+    @GetMapping("/convertTheTemperature")
+    public String getConvertTheTemperature(Model model) throws IOException{
+        String code = StreamUtils.copyToString(convertTemperature.getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+
+        return "task-08";
     }
 }
