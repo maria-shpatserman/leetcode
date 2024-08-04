@@ -123,7 +123,7 @@ public class Solution {
         boolean result = false;
         for (Map.Entry entry : collected) {
             List<Integer> indexes = (List<Integer>) entry.getValue();
-            int startIndex= 0;
+            int startIndex = 0;
             int leftIndex = indexes.get(startIndex);
             for (int i = startIndex + 1; i < indexes.size(); i++) {
                 result = isAvailableNearbyDuplicate(i, leftIndex, k, indexes);
@@ -157,6 +157,23 @@ public class Solution {
         Solution s = new Solution();
         boolean nearbyDuplicate = s.containsNearbyDuplicate(nums, k);
         log.info("result = {}", nearbyDuplicate);
+    }
+
+    public double[] convertTemperature(double celsius) {
+        List<Double> result = new ArrayList<>();
+        var kelvinTemp = getKelvinTemp(celsius);
+        result.add(kelvinTemp);
+        var fahrenheitTemp = getFahrenheitTemp(celsius);
+        result.add(fahrenheitTemp);
+        return result.stream().mapToDouble(i->i).toArray();
+    }
+
+    private double getFahrenheitTemp(double celsius) {
+        return celsius * 1.8 + 32.0;
+    }
+
+    private double getKelvinTemp(double celsius) {
+        return celsius + 273.15;
     }
 
 
