@@ -33,7 +33,8 @@ public class MainController {
     private Resource containsDuplicates2;
     @Value(value = "classpath:code/2469_convert_the_temperature.txt")
     private Resource convertTemperature;
-
+    @Value(value = "classpath:code/1_two_sum.txt")
+    private Resource twoSum;
     @Autowired
     public MainController(Solution solution) {
         this.solution = solution;
@@ -106,5 +107,13 @@ public class MainController {
         model.addAttribute("code", code);
 
         return "task-08";
+    }
+    //todo refactoring remove enormous amount of task- html make template with variable
+    @GetMapping("/getTwoSumIndexes")
+    public String getTwoSumIndexes(Model model) throws IOException{
+        String code = StreamUtils.copyToString(twoSum.getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+
+        return "task-09";
     }
 }

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.netunix.leetcode.util.ListNode;
 
+import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -152,11 +153,11 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        int[] nums = {1, 0, 1, 1};
-        int k = 1;
+        int[] nums = {2, 7, 11, 15};
+        int target = 9;
         Solution s = new Solution();
-        boolean nearbyDuplicate = s.containsNearbyDuplicate(nums, k);
-        log.info("result = {}", nearbyDuplicate);
+        int result[]= s.twoSum(nums, target);
+        log.info("result = {}", result);
     }
 
     public double[] convertTemperature(double celsius) {
@@ -165,7 +166,7 @@ public class Solution {
         result.add(kelvinTemp);
         var fahrenheitTemp = getFahrenheitTemp(celsius);
         result.add(fahrenheitTemp);
-        return result.stream().mapToDouble(i->i).toArray();
+        return result.stream().mapToDouble(i -> i).toArray();
     }
 
     private double getFahrenheitTemp(double celsius) {
@@ -176,5 +177,21 @@ public class Solution {
         return celsius + 273.15;
     }
 
+    public int[] twoSum(int[] nums, int target) {
+
+
+        int[] result = new int[2];
+        for (int i=0;i<nums.length-1;i++){
+            for (int j=i+1;j<nums.length;j++){
+                if((nums[i]+nums[j] ) == target){
+                    result[0] = i;
+                    result[1] = j;
+                    return result;
+                }
+            }
+        }
+        return result;
+
+    }
 
 }
