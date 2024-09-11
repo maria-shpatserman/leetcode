@@ -1,0 +1,72 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+
+     ListNode current = l1;
+        ListNode current2 = l2;
+        int additional = 0;
+        ListNode head = new ListNode(0);
+        ListNode end = head;
+        while (isOneNotLast(current, current2)) {
+            int result = additional;
+            if (current != null) {
+                result = result + current.val;
+                current = current.next;
+            }
+            if (current2 != null) {
+                result = result + current2.val;
+                current2 = current2.next;
+            }
+            if (result > 9) {
+                result = result - 10;
+                end.val =(result);
+                additional = 1;
+            } else {
+                end.val = (result);
+                additional = 0;
+            }
+            ListNode newEnd = (new ListNode(0));
+            end.next = newEnd;
+            end = newEnd;
+
+        }
+        //end value =0
+
+        int result = additional;
+        if (current != null) {
+            result = result + current.val;
+
+        }
+        if (current2 != null) {
+            result = result + current2.val;
+        }
+        if (result > 9) {
+            additional = 1;
+            result = result - 10;
+            end.val =result;
+            end.next = (new ListNode(additional));
+        } else {
+            end.val =(result);
+        }
+        return head;
+
+    }
+    private boolean isOneNotLast(ListNode l1, ListNode l2) {
+        if (!isLast(l1)) return true;
+        return !isLast(l2);
+    }
+
+   boolean isLast(ListNode current) {
+        if(current == null) return true;
+        return current.next == null;
+    }
+}
