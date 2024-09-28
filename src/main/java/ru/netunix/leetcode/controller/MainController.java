@@ -16,7 +16,6 @@ import java.nio.charset.Charset;
 @Controller
 @Slf4j
 public class MainController {
-    public Solution solution;
     @Value(value = "classpath:code/242_valid_anagram.txt")
     private Resource validAnagram;
     @Value(value = "classpath:code/88_merge_sorted_arrays.txt")
@@ -39,10 +38,7 @@ public class MainController {
     private Resource addTwoNumbers;
     @Value(value = "classpath:code/2_longest_substring_without_repeating_characters.txt")
     private Resource longestSubstring;
-    @Autowired
-    public MainController(Solution solution) {
-        this.solution = solution;
-    }
+
 
     @GetMapping("/")
     public String showHomePage() {
@@ -51,87 +47,105 @@ public class MainController {
 
     @GetMapping("/validAnagram")
     public String showAnswerValidAnagram(Model model) throws IOException {
-        String s = "anagram";
-        String t = "nagaram";
-        Boolean anagram = solution.isAnagram(s, t);
-        log.info("isAnagram for {}, {} result {}", s, t, anagram);
         String code = StreamUtils.copyToString(validAnagram.getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-        return "task-01";
+        String taskName = "Task 01. 242. Valid Anagram";
+        model.addAttribute("taskName", taskName);
+        return "task";
     }
 
     @GetMapping("/mergeSortedArrays")
     public String showAnswerMergeSortedArrays(Model model) throws IOException {
         String code = StreamUtils.copyToString(mergeSortedArrays.getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-
-        return "task-02";
+        String taskName = "Task 02. 88. Merge Sorted Arrays";
+        model.addAttribute("taskName", taskName);
+        return "task";
     }
 
     @GetMapping("/plusOne")
     public String showAnswerPlusOne(Model model) throws IOException {
         String code = StreamUtils.copyToString(plusOne.getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-
-        return "task-03";
+        String taskName = "Task 03. 66. Plus One";
+        model.addAttribute("taskName", taskName);
+        return "task";
     }
+
     @GetMapping("/sqrtX")
     public String showSqrtX(Model model) throws IOException {
         String code = StreamUtils.copyToString(sqrtX.getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-
-        return "task-04";
+        String taskName = "Task 04. 69. Sqrt(x)";
+        model.addAttribute("taskName", taskName);
+        return "task";
     }
+
     @GetMapping("/removeDuplicatesSortedList")
     public String showRemoveDuplicates(Model model) throws IOException {
         String code = StreamUtils.copyToString(rmvDuplicates.getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-
-        return "task-05";
+        String taskName = "Task 05. 83. Remove Duplicates from Sorted List";
+        model.addAttribute("taskName", taskName);
+        return "task";
     }
+
     @GetMapping("/getMajorityElement")
     public String getMajorityElement(Model model) throws IOException {
         String code = StreamUtils.copyToString(mjrElement.getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-
-        return "task-06";
+        String taskName = "Task 06. 169. Majority element";
+        model.addAttribute("taskName", taskName);
+        return "task";
 
     }
+
     @GetMapping("/containsDuplicateSecond")
     public String getContainsDuplicateSecond(Model model) throws IOException {
         String code = StreamUtils.copyToString(containsDuplicates2.getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-
-        return "task-07";
+        String taskName = "Task 07. 219. Contains Duplicate II";
+        model.addAttribute("taskName", taskName);
+        return "task";
 
     }
+
     @GetMapping("/convertTheTemperature")
-    public String getConvertTheTemperature(Model model) throws IOException{
+    public String getConvertTheTemperature(Model model) throws IOException {
         String code = StreamUtils.copyToString(convertTemperature.getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-
-        return "task-08";
+        String taskName = "Task 08. 2469. Convert The Temperature";
+        model.addAttribute("taskName", taskName);
+        return "task";
     }
+
     //todo refactoring remove enormous amount of task- html make template with variable
     @GetMapping("/getTwoSumIndexes")
-    public String getTwoSumIndexes(Model model) throws IOException{
+    public String getTwoSumIndexes(Model model) throws IOException {
         String code = StreamUtils.copyToString(twoSum.getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-
-        return "task-09";
+        String taskName = "Task 09. 1. Two Sum";
+        model.addAttribute("taskName", taskName);
+        return "task";
     }
+
     @GetMapping("/getAddTwoNumbersLinkedList")
-    public String getAddTwoNumbersLinkedList(Model model) throws IOException{
+    public String getAddTwoNumbersLinkedList(Model model) throws IOException {
         String code = StreamUtils.copyToString(addTwoNumbers.getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-
-        return "task-10";
+        String taskName = "Task 10. 2. Add Two Numbers";
+        model.addAttribute("taskName", taskName);
+        return "task";
     }
+
     @GetMapping("/getLongestSubstringWithoutRepeatingCharacters")
-    public String getLongestSubstring(Model model) throws IOException{
+    public String getLongestSubstring(Model model) throws IOException {
         String code = StreamUtils.copyToString(longestSubstring.getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 11. 3. Longest Substring Without Repeating Characters";
+        model.addAttribute("taskName", taskName);
 
-        return "task-11";
+        return "task";
     }
 }

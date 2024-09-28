@@ -2,17 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Task 03</title>
+    <title>Task</title>
 </head>
 <body>
-<h2>Task 03. 66. Plus One</h2>
+<h2 th:text="${taskName}"></h2>
 <hr>
 <p style="white-space: pre;"  th:text="${code}" >
 
 </p>
+
 <p>
     <a th:href="@{/}">Back to Home Page</a>
 </p>
+
 
 </body>
 </html>
