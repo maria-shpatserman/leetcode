@@ -8,8 +8,10 @@ import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -103,7 +105,8 @@ public class Solution {
     }
 
     boolean isLast(ListNode current) {
-        return current.getNext() == null;
+        if (current == null) return true;
+        return current.next == null;
     }
 
     public boolean containsNearbyDuplicate(int[] nums, int k) {
@@ -153,11 +156,12 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        int[] nums = {2, 7, 11, 15};
-        int target = 9;
-        Solution s = new Solution();
-        int result[]= s.twoSum(nums, target);
-        log.info("result = {}", result);
+
+        Solution solution = new Solution();
+        String s = "abcabcbb";
+        Integer l = solution.lengthOfLongestSubstring(s);
+        log.info("result {}", l);
+
     }
 
     public double[] convertTemperature(double celsius) {
@@ -181,9 +185,9 @@ public class Solution {
 
 
         int[] result = new int[2];
-        for (int i=0;i<nums.length-1;i++){
-            for (int j=i+1;j<nums.length;j++){
-                if((nums[i]+nums[j] ) == target){
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if ((nums[i] + nums[j]) == target) {
                     result[0] = i;
                     result[1] = j;
                     return result;
@@ -192,6 +196,140 @@ public class Solution {
         }
         return result;
 
+    }
+
+    public int lengthOfLongestSubstring(String s) {
+        char[] charArray = s.toCharArray();
+
+        int arrayLength = charArray.length;
+        if (arrayLength == 0) {
+            return 0;
+        }
+        int result = 0;
+        for (int index = 0; index < arrayLength; index++) {
+            int currentMaxLen = getMaxLen(index, charArray, arrayLength);
+            if (currentMaxLen > result) {
+                result = currentMaxLen;
+            }
+        }
+
+        return result;
+
+    }
+
+    private int getMaxLen(int index, char[] charArray, int arrayLength) {
+        Set<Character> set = new HashSet<>();
+        int indexStart = index;
+        char c = charArray[index];
+        while (set.add(c) && index < arrayLength) {
+
+            index = index + 1;
+            if (index < arrayLength) c = charArray[index];
+
+        }
+        return (index - indexStart) ;
+    }
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode current = l1;
+        ListNode current2 = l2;
+        int additional = 0;
+        ListNode head = new ListNode(0);
+        ListNode end = head;
+        while (isOneNotLast(current, current2)) {
+            int result = additional;
+            if (current != null) {
+                result = result + current.val;
+                current = current.next;
+            }
+            if (current2 != null) {
+                result = result + current2.val;
+                current2 = current2.next;
+            }
+            if (result > 9) {
+                result = result - 10;
+                end.val = (result);
+                additional = 1;
+            } else {
+                end.val = (result);
+                additional = 0;
+            }
+            ListNode newEnd = (new ListNode(0));
+            end.next = newEnd;
+            end = newEnd;
+
+        }
+        //end value =0
+
+        int result = additional;
+        if (current != null) {
+            result = result + current.val;
+
+        }
+        if (current2 != null) {
+            result = result + current2.val;
+        }
+        if (result > 9) {
+            additional = 1;
+            result = result - 10;
+            end.val = result;
+            end.next = (new ListNode(additional));
+        } else {
+            end.val = (result);
+        }
+        return head;
+
+    }
+
+    private boolean isOneNotLast(ListNode l1, ListNode l2) {
+        if (!isLast(l1)) return true;
+        return !isLast(l2);
+    }
+
+    public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        Integer num1 = getNumber(l1);
+        Integer num2 = getNumber(l2);
+        Integer sum = num1 + num2;
+        StringBuilder temp = new StringBuilder(sum.toString());
+        StringBuilder reversed = temp.reverse();
+        int[] array = reversed.chars().toArray();
+        ListNode current;
+        ListNode previous = null;
+        ListNode head = null;
+        for (int i = 0; i < array.length; i++) {
+
+            int intValue = array[i] - 48;
+            current = new ListNode(intValue);
+            if (i == 0) {
+                head = current;
+            }
+
+            if (previous != null) {
+                previous.setNext(current);
+                previous = current;
+            } else {
+                previous = current;
+            }
+
+
+        }
+        return head;
+
+    }
+
+    Integer getNumber(ListNode listNode) {
+        StringBuilder numberL1 = new StringBuilder();
+
+        ListNode current = listNode;
+        while (!isLast(current)) {
+            numberL1.append(current.getVal());
+            current = current.getNext();
+        }
+        numberL1.append(current.getVal());
+        log.info("number1 = " + numberL1);
+        Integer result = Integer.valueOf(numberL1.reverse().toString());
+        log.info("num1 = " + numberL1);
+        return result;
     }
 
 }
