@@ -1,0 +1,33 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        char[] charArray = s.toCharArray();
+
+        int arrayLength = charArray.length;
+        if (arrayLength == 0) {
+            return 0;
+        }
+        int result = 0;
+        for (int index = 0; index < arrayLength; index++) {
+            int currentMaxLen = getMaxLen(index, charArray, arrayLength);
+            if (currentMaxLen > result) {
+                result = currentMaxLen;
+            }
+        }
+
+        return result;
+
+    }
+
+    private int getMaxLen(int index, char[] charArray, int arrayLength) {
+        Set<Character> set = new HashSet<>();
+        int indexStart = index;
+        char c = charArray[index];
+        while (set.add(c) && index < arrayLength) {
+
+            index = index + 1;
+            if (index < arrayLength) c = charArray[index];
+
+        }
+        return (index - indexStart) ;
+    }
+}

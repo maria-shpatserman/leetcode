@@ -8,8 +8,10 @@ import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -103,7 +105,7 @@ public class Solution {
     }
 
     boolean isLast(ListNode current) {
-        if(current == null) return true;
+        if (current == null) return true;
         return current.next == null;
     }
 
@@ -154,24 +156,11 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        ListNode l11 = new ListNode(2);
-        ListNode l12 = new ListNode(4);
-        ListNode l13 = new ListNode(3);
-        l12.setNext(l13);
-        l11.setNext(l12);
-
-        ListNode l21 = new ListNode(5);
-        ListNode l22 = new ListNode(6);
-        ListNode l23 = new ListNode(4);
-//        ListNode l24 = new ListNode(7);
-//        l23.setNext(l24);
-        l22.setNext(l23);
-        l21.setNext(l22);
 
         Solution solution = new Solution();
-        ListNode result = solution.addTwoNumbers(l11, l21);
-        log.info(result.toString());
-
+        String s = "abcabcbb";
+        Integer l = solution.lengthOfLongestSubstring(s);
+        log.info("result {}", l);
 
     }
 
@@ -209,6 +198,38 @@ public class Solution {
 
     }
 
+    public int lengthOfLongestSubstring(String s) {
+        char[] charArray = s.toCharArray();
+
+        int arrayLength = charArray.length;
+        if (arrayLength == 0) {
+            return 0;
+        }
+        int result = 0;
+        for (int index = 0; index < arrayLength; index++) {
+            int currentMaxLen = getMaxLen(index, charArray, arrayLength);
+            if (currentMaxLen > result) {
+                result = currentMaxLen;
+            }
+        }
+
+        return result;
+
+    }
+
+    private int getMaxLen(int index, char[] charArray, int arrayLength) {
+        Set<Character> set = new HashSet<>();
+        int indexStart = index;
+        char c = charArray[index];
+        while (set.add(c) && index < arrayLength) {
+
+            index = index + 1;
+            if (index < arrayLength) c = charArray[index];
+
+        }
+        return (index - indexStart) ;
+    }
+
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode current = l1;
         ListNode current2 = l2;
@@ -227,7 +248,7 @@ public class Solution {
             }
             if (result > 9) {
                 result = result - 10;
-                end.val =(result);
+                end.val = (result);
                 additional = 1;
             } else {
                 end.val = (result);
@@ -251,10 +272,10 @@ public class Solution {
         if (result > 9) {
             additional = 1;
             result = result - 10;
-            end.val =result;
+            end.val = result;
             end.next = (new ListNode(additional));
         } else {
-            end.val =(result);
+            end.val = (result);
         }
         return head;
 

@@ -37,6 +37,8 @@ public class MainController {
     private Resource twoSum;
     @Value(value = "classpath:code/2_add_two_numbers.txt")
     private Resource addTwoNumbers;
+    @Value(value = "classpath:code/2_longest_substring_without_repeating_characters.txt")
+    private Resource longestSubstring;
     @Autowired
     public MainController(Solution solution) {
         this.solution = solution;
@@ -124,5 +126,12 @@ public class MainController {
         model.addAttribute("code", code);
 
         return "task-10";
+    }
+    @GetMapping("/getLongestSubstringWithoutRepeatingCharacters")
+    public String getLongestSubstring(Model model) throws IOException{
+        String code = StreamUtils.copyToString(longestSubstring.getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+
+        return "task-11";
     }
 }
