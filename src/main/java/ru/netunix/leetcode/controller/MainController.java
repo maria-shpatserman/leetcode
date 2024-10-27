@@ -1,14 +1,12 @@
 package ru.netunix.leetcode.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.netunix.leetcode.service.Solution;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -38,6 +36,8 @@ public class MainController {
     private Resource addTwoNumbers;
     @Value(value = "classpath:code/2_longest_substring_without_repeating_characters.txt")
     private Resource longestSubstring;
+    @Value(value = "classpath:code/4_median_two_sorted_array.txt")
+    private Resource medianTwoSortedArrays;
 
 
     @GetMapping("/")
@@ -144,6 +144,17 @@ public class MainController {
         model.addAttribute("code", code);
         //taskName
         String taskName = "Task 11. 3. Longest Substring Without Repeating Characters";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+    //getMedianTwoSortedArrays
+    @GetMapping("/getMedianTwoSortedArrays")
+    public String getMedianTwoSortedArrays(Model model) throws IOException {
+        String code = StreamUtils.copyToString(medianTwoSortedArrays.getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 12. 4. Median of Two Sorted Arrays";
         model.addAttribute("taskName", taskName);
 
         return "task";
