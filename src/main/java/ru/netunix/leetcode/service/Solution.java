@@ -158,10 +158,13 @@ public class Solution {
     public static void main(String[] args) {
 
         Solution solution = new Solution();
-        String s = "abcabcbb";
-        Integer l = solution.lengthOfLongestSubstring(s);
-        log.info("result {}", l);
-
+        // new String s = "abcabcbb";
+//        Integer l = solution.lengthOfLongestSubstring(s);
+//        log.info("result {}", l);
+        int[] num1 = new int[]{1, 3};
+        int[] num2 = new int[]{2};
+        double medianSortedArrays = solution.findMedianSortedArrays(num1, num2);
+        System.out.println("result = " + medianSortedArrays);
     }
 
     public double[] convertTemperature(double celsius) {
@@ -227,7 +230,7 @@ public class Solution {
             if (index < arrayLength) c = charArray[index];
 
         }
-        return (index - indexStart) ;
+        return (index - indexStart);
     }
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -329,6 +332,36 @@ public class Solution {
         log.info("number1 = " + numberL1);
         Integer result = Integer.valueOf(numberL1.reverse().toString());
         log.info("num1 = " + numberL1);
+        return result;
+    }
+
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        double result ;
+
+        int resultLength = nums1.length + nums2.length;
+        int indexMedian1;
+        int indexMedian2;
+        if (resultLength % 2 == 0) {
+            indexMedian1 = resultLength / 2;
+            indexMedian2 = (resultLength / 2) - 1;
+        } else {
+            indexMedian2 = (resultLength / 2);
+            indexMedian1 = indexMedian2;
+        }
+
+        int index1 = 0;
+        int index2 = 0;
+        int[] resultArray = new int[indexMedian1 + 1];
+        for (int i = 0; i <= indexMedian1; i++) {
+            if (index2 >= nums2.length || (index1 < nums1.length && nums1[index1] < nums2[index2])) {
+                resultArray[i] = nums1[index1];
+                index1 = index1 + 1;
+            } else {
+                resultArray[i] = nums2[index2];
+                index2 = index2 + 1;
+            }
+        }
+        result = (resultArray[indexMedian1] + resultArray[indexMedian2]) / 2.0;
         return result;
     }
 
