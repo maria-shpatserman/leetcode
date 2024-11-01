@@ -38,6 +38,8 @@ public class MainController {
     private Resource longestSubstring;
     @Value(value = "classpath:code/4_median_two_sorted_array.txt")
     private Resource medianTwoSortedArrays;
+    @Value(value = "classpath:code/5_longest_palindromic_substring.txt")
+    private Resource longestPalindromicSubstring;
 
 
     @GetMapping("/")
@@ -155,6 +157,16 @@ public class MainController {
         model.addAttribute("code", code);
         //taskName
         String taskName = "Task 12. 4. Median of Two Sorted Arrays";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+    @GetMapping("/getLongestPalindromicSubstring")
+    public String getLongestPalindromicSubstring(Model model) throws IOException {
+        String code = StreamUtils.copyToString(longestPalindromicSubstring.getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 13. 5. Longest Palindromic Substring";
         model.addAttribute("taskName", taskName);
 
         return "task";
