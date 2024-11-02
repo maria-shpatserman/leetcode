@@ -7,6 +7,7 @@ import ru.netunix.leetcode.util.ListNode;
 import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -158,13 +159,9 @@ public class Solution {
     public static void main(String[] args) {
 
         Solution solution = new Solution();
-        // new String s = "abcabcbb";
-//        Integer l = solution.lengthOfLongestSubstring(s);
-//        log.info("result {}", l);
-        int[] num1 = new int[]{1, 3};
-        int[] num2 = new int[]{2};
-        double medianSortedArrays = solution.findMedianSortedArrays(num1, num2);
-        System.out.println("result = " + medianSortedArrays);
+        int[] height =new int[]{1,8,6,2,5,4,8,3,7};
+       int result = solution.maxArea(height);
+        System.out.println("MAIN result = " + result);
     }
 
     public double[] convertTemperature(double celsius) {
@@ -336,7 +333,7 @@ public class Solution {
     }
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        double result ;
+        double result;
 
         int resultLength = nums1.length + nums2.length;
         int indexMedian1;
@@ -363,6 +360,102 @@ public class Solution {
         }
         result = (resultArray[indexMedian1] + resultArray[indexMedian2]) / 2.0;
         return result;
+    }
+
+    public String longestPalindrome(String s) {
+
+        List<String> evenPolindroms = evenPolindroms(s);
+        List<String> oddPolindroms = oddPolindroms(s);
+        if (evenPolindroms.size() == 0 && oddPolindroms.size() == 0) {
+            return s.substring(0, 1);
+        }
+        String longestEvenPolindrom = s.substring(0, 1);
+        String longestOddPolindrom = s.substring(0, 1);
+        if (evenPolindroms.size() > 0) {
+            longestEvenPolindrom = evenPolindroms.stream().max(Comparator.comparing(x -> x.length())).get();
+
+        }
+        if (oddPolindroms.size() > 0) {
+            longestOddPolindrom = oddPolindroms.stream().max(Comparator.comparing(x -> x.length())).get();
+        }
+        if (longestOddPolindrom.length() > longestEvenPolindrom.length()) {
+            return longestOddPolindrom;
+        } else return longestEvenPolindrom;
+
+    }
+
+    public List<String> oddPolindroms(String s) {
+        List<String> result = new ArrayList<>();
+        char[] charArray = s.toCharArray();
+
+        int arrayLength = charArray.length;
+        for (int i = 0; i < arrayLength; i++) {
+            int leftIndex = i - 1;
+            int rightIndex = i + 1;
+            while (leftIndex >= 0 && rightIndex < arrayLength && charArray[leftIndex] == charArray[rightIndex]) {
+                result.add(s.substring(leftIndex, rightIndex + 1));
+                leftIndex--;
+                rightIndex++;
+            }
+        }
+        return result;
+    }
+
+
+    public List<String> evenPolindroms(String s) {
+        char[] charArray = s.toCharArray();
+
+        int arrayLength = charArray.length;
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < arrayLength; i++) {
+            int leftIndex = i;
+            int rightIndex = i + 1;
+            while (leftIndex >= 0 && rightIndex < arrayLength && charArray[leftIndex] == charArray[rightIndex]) {
+                result.add(s.substring(leftIndex, rightIndex + 1));
+                leftIndex--;
+                rightIndex++;
+            }
+        }
+        return result;
+    }
+
+
+    public boolean isPalindrome(String s) {
+        char[] charArray = s.toCharArray();
+
+        int arrayLength = charArray.length;
+        int i = 0;
+        int j = arrayLength - 1;
+        while (i < j && charArray[i] == charArray[j]) {
+            i = i + 1;
+            j = j - 1;
+        }
+        if (charArray[i] == charArray[j]) {
+            return true;
+        }
+        return false;
+
+    }
+    public int maxArea(int[] height) {
+        int currentMaxArea=0;
+        int currentMaxHeight=0;
+        for (int i=0;i< height.length-1;i++){
+            if(height[i]>currentMaxHeight) {
+                for (int j = i + 1; j < height.length; j++) {
+                    int currentHeight = (height[i] < height[j]) ? height[i] : height[j];
+                    int currentWidth = j - i;
+                    int currentArea = currentHeight * currentWidth;
+                    if (currentArea > currentMaxArea) {
+                        currentMaxArea = currentArea;
+                    }
+                }
+            }
+            currentMaxHeight = (currentMaxHeight<height[i])?height[i]:currentMaxHeight;
+        }
+
+
+        return currentMaxArea;
+
     }
 
 }
