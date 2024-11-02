@@ -159,8 +159,8 @@ public class Solution {
     public static void main(String[] args) {
 
         Solution solution = new Solution();
-        String s = "bb";
-        String result = solution.longestPalindrome(s);
+        int[] height =new int[]{1,8,6,2,5,4,8,3,7};
+       int result = solution.maxArea(height);
         System.out.println("MAIN result = " + result);
     }
 
@@ -436,4 +436,26 @@ public class Solution {
         return false;
 
     }
+    public int maxArea(int[] height) {
+        int currentMaxArea=0;
+        int currentMaxHeight=0;
+        for (int i=0;i< height.length-1;i++){
+            if(height[i]>currentMaxHeight) {
+                for (int j = i + 1; j < height.length; j++) {
+                    int currentHeight = (height[i] < height[j]) ? height[i] : height[j];
+                    int currentWidth = j - i;
+                    int currentArea = currentHeight * currentWidth;
+                    if (currentArea > currentMaxArea) {
+                        currentMaxArea = currentArea;
+                    }
+                }
+            }
+            currentMaxHeight = (currentMaxHeight<height[i])?height[i]:currentMaxHeight;
+        }
+
+
+        return currentMaxArea;
+
+    }
+
 }
