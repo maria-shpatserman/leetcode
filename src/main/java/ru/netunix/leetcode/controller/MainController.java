@@ -42,6 +42,8 @@ public class MainController {
     private Resource longestPalindromicSubstring;
     @Value(value = "classpath:code/11_container_with_most_water.txt")
     private Resource mostWaterContainer;
+    @Value(value = "classpath:code/6_zigzag_conversion.txt")
+    private Resource zigzagConversion;
 
 
     @GetMapping("/")
@@ -179,6 +181,16 @@ public class MainController {
         model.addAttribute("code", code);
         //taskName
         String taskName = "Task 14. 11. Container With Most Water";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+    @GetMapping("/getZigZagConversion")
+    public String getZigZagConversion(Model model) throws IOException {
+        String code = StreamUtils.copyToString(zigzagConversion.getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 15. 6. ZigZag Conversion";
         model.addAttribute("taskName", taskName);
 
         return "task";

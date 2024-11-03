@@ -159,8 +159,9 @@ public class Solution {
     public static void main(String[] args) {
 
         Solution solution = new Solution();
-        int[] height =new int[]{1,8,6,2,5,4,8,3,7};
-       int result = solution.maxArea(height);
+        String s = "PAYPALISHIRING";
+        int numRows = 3;
+        String result = solution.convert(s, 3);
         System.out.println("MAIN result = " + result);
     }
 
@@ -436,11 +437,12 @@ public class Solution {
         return false;
 
     }
+
     public int maxArea(int[] height) {
-        int currentMaxArea=0;
-        int currentMaxHeight=0;
-        for (int i=0;i< height.length-1;i++){
-            if(height[i]>currentMaxHeight) {
+        int currentMaxArea = 0;
+        int currentMaxHeight = 0;
+        for (int i = 0; i < height.length - 1; i++) {
+            if (height[i] > currentMaxHeight) {
                 for (int j = i + 1; j < height.length; j++) {
                     int currentHeight = (height[i] < height[j]) ? height[i] : height[j];
                     int currentWidth = j - i;
@@ -450,11 +452,37 @@ public class Solution {
                     }
                 }
             }
-            currentMaxHeight = (currentMaxHeight<height[i])?height[i]:currentMaxHeight;
+            currentMaxHeight = (currentMaxHeight < height[i]) ? height[i] : currentMaxHeight;
         }
 
 
         return currentMaxArea;
+
+    }
+
+    public String convert(String s, int numRows) {
+        String result = "";
+        if (numRows == 1) return s;
+        Map<String, List<Character>> zigzagMap = new HashMap<>();
+        for (int i = 0; i < numRows; i++) {
+            zigzagMap.put("line" + i, new ArrayList<>());
+        }
+        char[] charArray = s.toCharArray();
+        int iterator = 0;
+        while (iterator < charArray.length) {
+            for (int j = 0; j < numRows && iterator < charArray.length; j++) {
+                zigzagMap.get("line" + j).add(charArray[iterator]);
+                iterator++;
+            }
+            for (int k = numRows - 2; k > 0 && iterator < charArray.length; k--) {
+                zigzagMap.get("line" + k).add(charArray[iterator]);
+                iterator++;
+            }
+        }
+        for (int i = 0; i < numRows; i++) {
+            result = result + zigzagMap.get("line" + i).stream().map(e->e.toString()).collect(Collectors.joining());
+        }
+        return result;
 
     }
 
