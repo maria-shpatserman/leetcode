@@ -1,0 +1,49 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+class Solution {
+    public int myAtoi(String s) {
+        if(s==null) return 0;
+        String trimmed = s.trim();
+        if(trimmed.isBlank()) return 0;
+        Pattern regexp = Pattern.compile("(^[-+]?)([0-9]+).*");
+        Matcher m = regexp.matcher(trimmed);
+
+        if (m.find()){
+            String sign = m.group(1);
+           String value =removeZerosFromBeginning( m.group(2));
+            return combineRoundedIntegerResult(value,sign.equals("-"));
+        }
+        else return 0;
+
+
+    }
+     int combineRoundedIntegerResult(String s, Boolean isNegative) {
+        String maxIntegerValue = "2147483648";
+        Integer maxLength = maxIntegerValue.length();
+        if(s.length()>maxLength)
+            return  getBoundaryInteger(isNegative);
+
+        int factor = (isNegative) ? -1 : 1;
+        if (s.length() < maxLength) {
+            return factor * Integer.parseInt(s);
+        }
+        if (s.compareTo(maxIntegerValue) < 0) {
+            return factor * Integer.parseInt(s);
+        }
+        return getBoundaryInteger(isNegative);
+
+    }
+
+    int getBoundaryInteger(Boolean isNegative) {
+        if (isNegative) {
+            return -1 * Integer.parseInt("2147483647") - 1;
+        }
+        return Integer.parseInt("2147483647");
+
+    }
+     String removeZerosFromBeginning(String s) {
+        //remove zeros
+        String[] noZeros = s.split("^0*");
+        return (noZeros.length == 0) ? "0" : noZeros[noZeros.length - 1];
+    }
+}

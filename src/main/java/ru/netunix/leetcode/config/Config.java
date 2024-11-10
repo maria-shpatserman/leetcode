@@ -41,4 +41,6 @@ public class Config {
     private Resource zigzagConversion;
     @Value(value = "classpath:code/7_reverse_integer.txt")
     private Resource reverseInteger;
+    @Value(value = "classpath:code/8_string_to_integer_atoi.txt")
+    private Resource stringToIntegerAtoi;
 }

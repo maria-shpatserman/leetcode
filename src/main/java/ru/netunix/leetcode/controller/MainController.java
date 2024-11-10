@@ -183,4 +183,14 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/getStringToIntegerAtoi")
+    public String getStringToIntegerAtoi(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getStringToIntegerAtoi().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 17. 8. String to Integer (atoi)";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 }
