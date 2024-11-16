@@ -43,4 +43,6 @@ public class Config {
     private Resource reverseInteger;
     @Value(value = "classpath:code/8_string_to_integer_atoi.txt")
     private Resource stringToIntegerAtoi;
+    @Value(value = "classpath:code/17_letter_combintaions_of_phone_number.txt")
+    private Resource letterCombinations;
 }
