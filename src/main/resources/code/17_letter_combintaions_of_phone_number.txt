@@ -1,0 +1,44 @@
+class Solution {
+   public List<String> letterCombinations(String digits) {
+        List<String> result = new ArrayList<>();
+        Map<String, String[]> mapping = new HashMap<>() {
+            {
+                put("2", "abc".split(""));
+                put("3", "def".split(""));
+                put("4", "ghi".split(""));
+                put("5", "jkl".split(""));
+                put("6", "mno".split(""));
+                put("7", "pqrs".split(""));
+                put("8", "tuv".split(""));
+                put("9", "wxyz".split(""));
+
+            }
+
+        };
+        if (digits.length() == 0) return result;
+        if (digits.length() == 1) return List.of(mapping.get(digits));
+        String[] digitsKeys = digits.split("");
+        String[] left = mapping.get(digitsKeys[0]);
+        for (int i = 1; i < digitsKeys.length; i++) {
+            String[] right = mapping.get(digitsKeys[i]);
+            List<String> combinedStringArrays = combineStringArrays(left, right);
+            left =combinedStringArrays.toArray(String[]::new);
+        }
+
+        result = Arrays.stream(left).toList();
+
+
+        return result;
+    }
+
+    List<String> combineStringArrays(String[] left, String[] right) {
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < left.length; i++) {
+            for (int j = 0; j < right.length; j++) {
+                result.add(new String(left[i] + right[j]));
+            }
+        }
+        return result;
+    }
+
+}

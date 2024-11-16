@@ -193,4 +193,15 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/getLetterCombinations")
+    public String getLetterCombinations(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getLetterCombinations().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 18. 17. Letter Combinations of a Phone Number";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+
 }
