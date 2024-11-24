@@ -203,5 +203,15 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/get3Sum")
+    public String get3Sum(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getThreeSum().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 19. 15. 3 Sum";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }

@@ -1,0 +1,55 @@
+class Solution {
+     public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (nums.length < 3) return result;
+
+
+        Arrays.sort(nums);
+        Map<Integer, Integer> keyAmount = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            Integer i1 = keyAmount.containsKey(nums[i]) ?
+                    keyAmount.put(nums[i], keyAmount.get(nums[i]) + 1) : keyAmount.put(nums[i], 1);
+
+        }
+        if (keyAmount.size() == 1 && keyAmount.containsKey(0)) {
+            result.add(List.of(0, 0, 0));
+            return result;
+        }
+
+        HashMap<String, List<Integer>> mapResult = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                int[] r = new int[3];
+                r[0] = nums[i];
+                r[1] = nums[j];
+                int leftvalue = (int) (0 - r[0] - r[1]);
+                r[2] = leftvalue;
+
+                if (keyAmount.keySet().contains(leftvalue)) {
+                    if (r[2] == 0 && r[2] == r[0] && keyAmount.get(r[2]) > 2) {
+                        Arrays.sort(r);
+                        List<Integer> list = Arrays.stream(r).boxed().toList();
+                        String key = "" + r[0] + "" + r[1] + "" + r[2];
+                        mapResult.put(key, list);
+                    }
+                    if (r[2] != 0 && (r[2] == r[1] || r[2] == r[0]) && keyAmount.get(r[2]) > 1) {
+                        Arrays.sort(r);
+                        List<Integer> list = Arrays.stream(r).boxed().toList();
+                        String key = "" + r[0] + "" + r[1] + "" + r[2];
+                        mapResult.put(key, list);
+                    }
+                    if (r[2] != r[1] && r[2] != r[0]) {
+                        Arrays.sort(r);
+                        List<Integer> list = Arrays.stream(r).boxed().toList();
+                        String key = "" + r[0] + "" + r[1] + "" + r[2];
+                        mapResult.put(key, list);
+                    }
+                }
+            }
+        }
+        result = new ArrayList<>(mapResult.values());
+        return result;
+
+
+    }
+}
