@@ -45,4 +45,6 @@ public class Config {
     private Resource stringToIntegerAtoi;
     @Value(value = "classpath:code/17_letter_combintaions_of_phone_number.txt")
     private Resource letterCombinations;
+    @Value(value = "classpath:code/15_3_sum.txt")
+    private Resource threeSum;
 }
