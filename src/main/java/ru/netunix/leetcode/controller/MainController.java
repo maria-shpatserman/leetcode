@@ -223,5 +223,15 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/get3SumClosest")
+    public String get3SumClosest(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getThreeSumClosest().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 21. 16. 3 Sum Closest";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }

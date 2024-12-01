@@ -27,15 +27,18 @@ public class SolutionNext {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         SolutionNext s = new SolutionNext();
-        int[] nums = new int[]{1000000000,1000000000,1000000000,1000000000 };
-        LocalTime time =   LocalTime.now();
+        int[] nums = new int[]{1000000000, 1000000000, 1000000000, 1000000000};
+        LocalTime time = LocalTime.now();
         System.out.println("Time before  foursum " + time);
 //        int[] nums = new int[]{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2 };
 
         List<List<Integer>> lists = s.fourSum(nums, -294967296);
         System.out.println(lists);
-         time =   LocalTime.now();
+        time = LocalTime.now();
         System.out.println("Time after  foursum " + time);
+        int[] nums1 = new int[]{-1,2,1,-4};
+        int threeSumClosest = s.threeSumClosest(nums1, 1);
+        System.out.println("threeSumClosest = "+threeSumClosest);
 
     }
 
@@ -205,25 +208,28 @@ public class SolutionNext {
 
 
     }
+
     public List<List<Integer>> fourSum(int[] nums, int target) {
         List<List<Integer>> result = new ArrayList<>();
-        if (nums.length <4 ) return result;
+        if (nums.length < 4) return result;
         Set<Integer> mySet = Arrays.stream(nums).boxed().collect(Collectors.toSet());
-        if(mySet.size() == 1) {
-            if((Long.valueOf(nums[0]+nums[1])+nums[2])==Long.valueOf(target)-nums[0])
-            {    List<Integer> list = new ArrayList<>();
-                list.add(nums[0]);  list.add(nums[0]);  list.add(nums[0]);  list.add(nums[0]);
-               result.add(list);
+        if (mySet.size() == 1) {
+            if ((Long.valueOf(nums[0] + nums[1]) + nums[2]) == Long.valueOf(target) - nums[0]) {
+                List<Integer> list = new ArrayList<>();
+                list.add(nums[0]);
+                list.add(nums[0]);
+                list.add(nums[0]);
+                list.add(nums[0]);
+                result.add(list);
                 return result;
-            }
-            else return result;
+            } else return result;
         }
         HashMap<String, List<Integer>> mapResult = new HashMap<>();
-        for(int i=0;i<nums.length;i++){
-            for(int j=i+1;j<nums.length;j++){
-                for(int k=j+1;k<nums.length;k++){
-                    for(int p=k+1;p<nums.length;p++){
-                        if((Long.valueOf(nums[i]+nums[j])+nums[k])==Long.valueOf(target)-nums[p]){
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                for (int k = j + 1; k < nums.length; k++) {
+                    for (int p = k + 1; p < nums.length; p++) {
+                        if ((Long.valueOf(nums[i] + nums[j]) + nums[k]) == Long.valueOf(target) - nums[p]) {
 
                             int[] r = new int[4];
                             r[0] = nums[i];
@@ -232,7 +238,7 @@ public class SolutionNext {
                             r[3] = nums[p];
                             Arrays.sort(r);
                             List<Integer> list = Arrays.stream(r).boxed().toList();
-                            String key = "" + r[0] + "" + r[1] + "" + r[2]+""+r[3];
+                            String key = "" + r[0] + "" + r[1] + "" + r[2] + "" + r[3];
                             mapResult.put(key, list);
                         }
                     }
@@ -241,6 +247,27 @@ public class SolutionNext {
         }
         result = new ArrayList<>(mapResult.values());
         return result;
+    }
+
+    public int threeSumClosest(int[] nums, int target) {
+        int result = nums[0] + nums[1] + nums[2];
+        if (nums.length == 3) return result;
+        int currentDifference = (target - result) < 0 ? (target - result) * (-1) : (target - result);
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                for (int k = j + 1; k < nums.length; k++) {
+                    int middleResult = nums[i] + nums[j] + nums[k];
+                    int middleDifference = (target - middleResult) < 0 ? (target - middleResult) * (-1) : (target - middleResult);
+                    if (middleDifference < currentDifference) {
+                        currentDifference = middleDifference;
+                        result = middleResult;
+                    }
+                }
+            }
+        }
+
+        return result;
+
     }
 
 

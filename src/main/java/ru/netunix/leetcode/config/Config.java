@@ -50,6 +50,8 @@ public class Config {
 
     @Value(value = "classpath:code/18_4Sum.txt")
     private Resource fourSum;
+    @Value(value = "classpath:code/16_3SumClosest.txt")
+    private Resource threeSumClosest;
 
 
 }
