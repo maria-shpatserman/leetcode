@@ -47,4 +47,9 @@ public class Config {
     private Resource letterCombinations;
     @Value(value = "classpath:code/15_3_sum.txt")
     private Resource threeSum;
+
+    @Value(value = "classpath:code/18_4Sum.txt")
+    private Resource fourSum;
+
+
 }

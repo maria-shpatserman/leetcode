@@ -1,0 +1,39 @@
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (nums.length <4 ) return result;
+        Set<Integer> mySet = Arrays.stream(nums).boxed().collect(Collectors.toSet());
+        if(mySet.size() == 1) {
+            if((Long.valueOf(nums[0]+nums[1])+nums[2])==Long.valueOf(target)-nums[0])
+            {    List<Integer> list = new ArrayList<>();
+                list.add(nums[0]);  list.add(nums[0]);  list.add(nums[0]);  list.add(nums[0]);
+               result.add(list);
+                return result;
+            }
+            else return result;
+        }
+        HashMap<String, List<Integer>> mapResult = new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            for(int j=i+1;j<nums.length;j++){
+                for(int k=j+1;k<nums.length;k++){
+                    for(int p=k+1;p<nums.length;p++){
+                        if((Long.valueOf(nums[i]+nums[j])+nums[k])==Long.valueOf(target)-nums[p]){
+
+                            int[] r = new int[4];
+                            r[0] = nums[i];
+                            r[1] = nums[j];
+                            r[2] = nums[k];
+                            r[3] = nums[p];
+                            Arrays.sort(r);
+                            List<Integer> list = Arrays.stream(r).boxed().toList();
+                            String key = "" + r[0] + "" + r[1] + "" + r[2]+""+r[3];
+                            mapResult.put(key, list);
+                        }
+                    }
+                }
+            }
+        }
+        result = new ArrayList<>(mapResult.values());
+        return result;
+    }
+}
