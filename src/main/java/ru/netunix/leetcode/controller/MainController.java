@@ -213,5 +213,35 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/get4Sum")
+    public String get4Sum(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getFourSum().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 20. 18. 4 Sum";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+    @GetMapping("/get3SumClosest")
+    public String get3SumClosest(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getThreeSumClosest().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 21. 16. 3 Sum Closest";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+    @GetMapping("/getRemoveNthElement")
+    public String getRemoveNthElement(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getRemoveNthElement().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 22. 19. Remove Nth Node from The End of The List";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }
