@@ -1,5 +1,7 @@
 package ru.netunix.leetcode.service;
 
+import ru.netunix.leetcode.util.ListNode;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,18 +29,19 @@ public class SolutionNext {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         SolutionNext s = new SolutionNext();
-        int[] nums = new int[]{1000000000, 1000000000, 1000000000, 1000000000};
-        LocalTime time = LocalTime.now();
-        System.out.println("Time before  foursum " + time);
-//        int[] nums = new int[]{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2 };
+        ListNode l5 = new ListNode(5);
+        ListNode l4 = new ListNode(4);
+        l4.setNext(l5);
+        ListNode l3 = new ListNode(3);
+        l3.setNext(l4);
+        ListNode l2 = new ListNode(2);
+        l2.setNext(l3);
+        ListNode l1 = new ListNode(1);
+        l1.setNext(l2);
+        ListNode l0 = new ListNode(0);
+        l0.setNext(l1);
+        s.removeNthFromEnd(l0, 1);
 
-        List<List<Integer>> lists = s.fourSum(nums, -294967296);
-        System.out.println(lists);
-        time = LocalTime.now();
-        System.out.println("Time after  foursum " + time);
-        int[] nums1 = new int[]{-1,2,1,-4};
-        int threeSumClosest = s.threeSumClosest(nums1, 1);
-        System.out.println("threeSumClosest = "+threeSumClosest);
 
     }
 
@@ -265,6 +268,43 @@ public class SolutionNext {
                 }
             }
         }
+
+        return result;
+
+    }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode result = head;
+        ListNode current = head;
+        ListNode elementToRemove = head;
+        ListNode elementBeforeRemoved = head;
+        int i =1;
+        while(current.getNext()!=null){
+            current = current.getNext();
+
+            if(i>n){
+                elementBeforeRemoved = elementBeforeRemoved.getNext();
+                elementToRemove = elementToRemove.getNext();
+            }
+            if(i == n){
+                elementToRemove = elementBeforeRemoved.getNext();
+            }
+            i++;
+
+        }
+
+        //if element to remove is the head
+        if(elementToRemove == head){
+            result = elementToRemove.getNext();
+            elementToRemove.setNext(null);
+        }
+        else {
+            ListNode temp = elementToRemove.getNext();
+            elementToRemove.setNext(null);
+            elementBeforeRemoved.setNext(temp);
+        }
+
+
 
         return result;
 

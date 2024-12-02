@@ -233,5 +233,15 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/getRemoveNthElement")
+    public String getRemoveNthElement(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getRemoveNthElement().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 22. 19. Remove Nth Node from The End of The List";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }
