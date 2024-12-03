@@ -54,6 +54,8 @@ public class Config {
     private Resource threeSumClosest;
     @Value(value = "classpath:code/19_remove_nth_node_from_end_of_list.txt")
     private Resource removeNthElement;
+    @Value(value = "classpath:code/22_generate_parentheses.txt")
+    private Resource generateParentheses;
 
 //19_remove_nth_node_from_end_of_list.txt
 }

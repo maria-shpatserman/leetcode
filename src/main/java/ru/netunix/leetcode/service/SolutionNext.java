@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -29,18 +30,9 @@ public class SolutionNext {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         SolutionNext s = new SolutionNext();
-        ListNode l5 = new ListNode(5);
-        ListNode l4 = new ListNode(4);
-        l4.setNext(l5);
-        ListNode l3 = new ListNode(3);
-        l3.setNext(l4);
-        ListNode l2 = new ListNode(2);
-        l2.setNext(l3);
-        ListNode l1 = new ListNode(1);
-        l1.setNext(l2);
-        ListNode l0 = new ListNode(0);
-        l0.setNext(l1);
-        s.removeNthFromEnd(l0, 1);
+
+
+        System.out.println(s.generateByteCode(10, 5));
 
 
     }
@@ -278,15 +270,15 @@ public class SolutionNext {
         ListNode current = head;
         ListNode elementToRemove = head;
         ListNode elementBeforeRemoved = head;
-        int i =1;
-        while(current.getNext()!=null){
+        int i = 1;
+        while (current.getNext() != null) {
             current = current.getNext();
 
-            if(i>n){
+            if (i > n) {
                 elementBeforeRemoved = elementBeforeRemoved.getNext();
                 elementToRemove = elementToRemove.getNext();
             }
-            if(i == n){
+            if (i == n) {
                 elementToRemove = elementBeforeRemoved.getNext();
             }
             i++;
@@ -294,21 +286,60 @@ public class SolutionNext {
         }
 
         //if element to remove is the head
-        if(elementToRemove == head){
+        if (elementToRemove == head) {
             result = elementToRemove.getNext();
             elementToRemove.setNext(null);
-        }
-        else {
+        } else {
             ListNode temp = elementToRemove.getNext();
             elementToRemove.setNext(null);
             elementBeforeRemoved.setNext(temp);
         }
 
 
-
         return result;
 
     }
 
+    public List<String> generateParenthesis(int n) {
+
+        return generateByteCode(n*2,n);
+    }
+
+
+
+
+    List<String> generateByteCode(int len, int n) {
+        List<String> result = new ArrayList<>();
+        int maxValue = (int) Math.pow(2, len);
+        for (int i = 0; i < maxValue; i++) {
+            String binaryString = String.format("%" + len + "s",Integer.toBinaryString(i)).replace(' ', '0');
+            long count = binaryString.chars().filter(ch -> ch == '0').count();
+
+            if (count == n) {
+                Boolean needToAdd = true;
+                int leftParentheses = 2;
+                int rightParentheses = 2;
+                String resultString = "";
+                for (String c : binaryString.split("")) {
+                    if (c.equals("0")) {
+                        leftParentheses--;
+                        resultString = resultString + "(";
+
+                    } else {
+                        rightParentheses--;
+                        resultString = resultString + ")";
+                    }
+                    if (leftParentheses > rightParentheses) {
+                        needToAdd = false;
+                    }
+
+                }
+                if (needToAdd) result.add(resultString);
+            }
+
+
+        }
+        return result;
+    }
 
 }

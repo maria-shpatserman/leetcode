@@ -1,0 +1,43 @@
+class Solution {
+  public List<String> generateParenthesis(int n) {
+
+        return generateByteCode(n*2,n);
+    }
+
+
+
+
+    List<String> generateByteCode(int len, int n) {
+        List<String> result = new ArrayList<>();
+        int maxValue = (int) Math.pow(2, len);
+        for (int i = 0; i < maxValue; i++) {
+            String binaryString = String.format("%" + len + "s",Integer.toBinaryString(i)).replace(' ', '0');
+            long count = binaryString.chars().filter(ch -> ch == '0').count();
+
+            if (count == n) {
+                Boolean needToAdd = true;
+                int leftParentheses = 2;
+                int rightParentheses = 2;
+                String resultString = "";
+                for (String c : binaryString.split("")) {
+                    if (c.equals("0")) {
+                        leftParentheses--;
+                        resultString = resultString + "(";
+
+                    } else {
+                        rightParentheses--;
+                        resultString = resultString + ")";
+                    }
+                    if (leftParentheses > rightParentheses) {
+                        needToAdd = false;
+                    }
+
+                }
+                if (needToAdd) result.add(resultString);
+            }
+
+
+        }
+        return result;
+    }
+}

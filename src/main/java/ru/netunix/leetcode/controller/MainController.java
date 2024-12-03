@@ -243,5 +243,15 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/generateParentheses")
+    public String generateParentheses(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getGenerateParentheses().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 23. 22. Generate Parentheses";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }
