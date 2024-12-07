@@ -243,5 +243,25 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/generateParentheses")
+    public String generateParentheses(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getGenerateParentheses().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 23. 22. Generate Parentheses";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+    @GetMapping("/getMergedKSortedLists")
+    public String getMergedKSortedLists(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getMergeKSortedLists().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 24. 23. Merge k Sorted Lists";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }

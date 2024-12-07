@@ -1,0 +1,138 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+     public ListNode mergeKLists(ListNode[] lists) {
+        ListNode result=null;
+          if (lists.length==0) return result;
+        try {
+            result = mergeSortedListsIntoOne(new ArrayList<>(Arrays.asList(lists)));
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
+    ListNode mergeSortedListsIntoOne(List<ListNode> listOfListNodes) throws ExecutionException, InterruptedException {
+
+        if (listOfListNodes.size() == 1) return listOfListNodes.get(0);
+        System.out.println("start size = "+listOfListNodes.size());
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        List<ListNode> result = mergeSortedListsWithService(listOfListNodes,executorService);
+
+        while (result.size()>1){
+
+            result= mergeSortedListsWithService(result,executorService);
+        }
+        //if list of listnodes is 1
+        executorService.shutdown();
+        return result.get(0);
+
+    }
+
+    List<ListNode> mergeSortedListsWithService(List<ListNode> listOfListNodes,ExecutorService executorService) throws InterruptedException, ExecutionException {
+
+
+
+        List<Callable<ListNode>> callableTasks = new ArrayList<>();
+        //odd //even size of array
+        for (int i = 0; i < listOfListNodes.size() - 1; i = i + 2) {
+
+            int j = i + 1;
+
+            ListNode left = listOfListNodes.get(i);
+            ListNode right = listOfListNodes.get(j);
+            Callable<ListNode> callableTask = () -> {
+                return mergeSortedLists(left, right);
+
+            };
+
+            callableTasks.add(callableTask);
+
+
+        }
+        List<Future<ListNode>> futures = executorService.invokeAll(callableTasks);
+
+
+
+        List<ListNode> result = new ArrayList<>();
+        //add odd last element
+        if (listOfListNodes.size() % 2 != 0) {
+            result.add(listOfListNodes.getLast());
+        }
+        for (int i = 0; i < futures.size(); i++) {
+            result.add(futures.get(i).get());
+
+        }
+        return result;
+    }
+
+
+    ListNode mergeSortedLists(ListNode left, ListNode right) {
+           if(left==null){
+            return right;
+        }
+        if(right==null){
+            return left;
+        }
+        ListNode current = right;
+        ListNode merged = left;
+        ListNode previous = null;
+        while (current.next != null) {
+
+            while ((merged.val < current.val) && merged.next != null) {
+                previous = merged;
+                merged = merged.next;
+
+            }
+            //insert between
+            ListNode newNode = new ListNode(current.val);
+            //new head
+            if (merged.val <= newNode.val) {
+                newNode.next=merged.next;
+                merged.next = (newNode);
+                previous = newNode;
+
+            }else if (previous == null) {
+                left = newNode;
+                newNode.next = (merged);
+                merged=left;
+            }   else {
+                previous.next = (newNode);
+                newNode.next = (merged);
+                previous = newNode;
+            }
+
+
+            current = current.next;
+
+        }
+        while ((merged.val <= current.val) && merged.next != null) {
+            previous = merged;
+            merged = merged.next;
+
+        }
+        //insert between
+        ListNode newNode = new ListNode(current.val);
+        //new end
+        if (newNode.val > merged.val) {
+            merged.next =(newNode);
+        } else {
+            if(previous!=null) {previous.next = (newNode);}
+            else{left = newNode;}
+            newNode.next = (merged);
+        }
+
+        return left;
+    }
+
+}
