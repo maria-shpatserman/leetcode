@@ -253,5 +253,15 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/getMergedKSortedLists")
+    public String getMergedKSortedLists(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getMergeKSortedLists().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 24. 23. Merge k Sorted Lists";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }

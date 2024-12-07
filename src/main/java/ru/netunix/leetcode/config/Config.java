@@ -56,6 +56,7 @@ public class Config {
     private Resource removeNthElement;
     @Value(value = "classpath:code/22_generate_parentheses.txt")
     private Resource generateParentheses;
+    @Value(value = "classpath:code/23_merge_k_sorted_lists.txt")
+    private Resource mergeKSortedLists;
 
-//19_remove_nth_node_from_end_of_list.txt
 }

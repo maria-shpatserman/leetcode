@@ -8,12 +8,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 public class SolutionNext {
@@ -30,11 +30,235 @@ public class SolutionNext {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         SolutionNext s = new SolutionNext();
+        List<ListNode> listOfListNodes1 = new ArrayList<>();
+
+        ListNode l4= new ListNode(5);
+
+        ListNode l3 = new ListNode(4);
+        l3.setNext(l4);
+        ListNode l2 = new ListNode(1);
+        l2.setNext(l3);
+        ListNode l1 = new ListNode(-2);
+        l1.setNext(l2);
+
+        ListNode r3 = new ListNode(6);
+
+        ListNode r2 = new ListNode(5);
+        r2.setNext(r3);
+        ListNode r1 = new ListNode(-2);
+        r1.setNext(r2);
+
+        listOfListNodes1.add(l1);
+        listOfListNodes1.add(r1);
+        ListNode l22 = new ListNode(0);
+        ListNode l12 = new ListNode(-2);
+        l12.setNext(l22);
+         listOfListNodes1.add(l12);
+        LocalTime myObj = LocalTime.now();
+        System.out.println("Time before mergeSortedListsIntoOne " + myObj);
+        ListNode nodes = s.mergeSortedListsIntoOne(listOfListNodes1);
+        myObj = LocalTime.now();
+        System.out.println("Time after mergeSortedListsIntoOne " + myObj);
+        while (nodes.getNext() != null) {
+            System.out.println(String.format("%s result element = %d", Thread.currentThread().getName(), nodes.getVal()));
+            nodes = nodes.getNext();
+        }
+        System.out.println(String.format("%s end result element = %d", Thread.currentThread().getName(), nodes.getVal()));
+//----------------------------
+        List<ListNode> listOfListNodes2 = new ArrayList<>();
 
 
-        System.out.println(s.generateByteCode(10, 5));
 
 
+        //------
+        ListNode l33 = new ListNode(-2);
+        ListNode l23 = new ListNode(-3);
+        l23.setNext(l33);
+        ListNode l13 = new ListNode(-3);
+        l13.setNext(l23);
+        ListNode r43 = new ListNode(-2);
+        ListNode r33 = new ListNode(-2);
+        r33.setNext(r43);
+        ListNode r23 = new ListNode(-3);
+        r23.setNext(r33);
+        ListNode r13 = new ListNode(-3);
+        r13.setNext(r23);
+        listOfListNodes2.add(l13);
+        listOfListNodes2.add(r13);
+
+        LocalTime myObj2 = LocalTime.now();
+        System.out.println("Time before mergeSortedListsIntoOne2 " + myObj2);
+        ListNode nodes2 = s.mergeSortedListsIntoOne(listOfListNodes2);
+        myObj2 = LocalTime.now();
+        System.out.println("Time after mergeSortedListsIntoOne2 " + myObj2);
+        while (nodes2.getNext() != null) {
+            System.out.println(String.format("%s result element = %d", Thread.currentThread().getName(), nodes2.getVal()));
+            nodes2 = nodes2.getNext();
+        }
+        System.out.println(String.format("%s end result element = %d", Thread.currentThread().getName(), nodes2.getVal()));
+//-------------------------------
+        List<ListNode> listOfListNodes3 = new ArrayList<>();
+
+        ListNode pl1 = new ListNode(-3);
+
+        ListNode pr4 = new ListNode(-1);
+        ListNode pr3 = new ListNode(-1);
+        pr3.setNext(pr4);
+        ListNode pr2 = new ListNode(-2);
+        pr2.setNext(pr3);
+        ListNode pr1 = new ListNode(-2);
+        pr1.setNext(pr2);
+        listOfListNodes3.add(pl1);
+        listOfListNodes3.add(pr1);
+
+        LocalTime myObj3= LocalTime.now();
+        System.out.println("Time before mergeSortedListsIntoOne3 " + myObj3);
+        ListNode nodes3 = s.mergeSortedListsIntoOne(listOfListNodes3);
+        myObj3 = LocalTime.now();
+        System.out.println("Time after mergeSortedListsIntoOne3 " + myObj3);
+        while (nodes3.getNext() != null) {
+            System.out.println(String.format("%s result element = %d", Thread.currentThread().getName(), nodes3.getVal()));
+            nodes3 = nodes3.getNext();
+        }
+        System.out.println(String.format("%s end result element = %d", Thread.currentThread().getName(), nodes3.getVal()));
+
+
+    }
+    public ListNode mergeKLists(ListNode[] lists) {
+        ListNode result=null;
+        if (lists.length==0) return result;
+        try {
+            result = mergeSortedListsIntoOne(new ArrayList<>(Arrays.asList(lists)));
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
+    ListNode mergeSortedListsIntoOne(List<ListNode> listOfListNodes) throws ExecutionException, InterruptedException {
+        if (listOfListNodes.size() == 1) return listOfListNodes.get(0);
+        System.out.println("start size = "+listOfListNodes.size());
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        List<ListNode> result = mergeSortedListsWithService(listOfListNodes,executorService);
+
+        while (result.size()>1){
+            System.out.println("result size = "+result.size());
+            result= mergeSortedListsWithService(result,executorService);
+        }
+        //if list of listnodes is 1
+        executorService.shutdown();
+        return result.get(0);
+
+    }
+
+    List<ListNode> mergeSortedListsWithService(List<ListNode> listOfListNodes,ExecutorService executorService) throws InterruptedException, ExecutionException {
+
+
+
+        List<Callable<ListNode>> callableTasks = new ArrayList<>();
+        //odd //even size of array
+        for (int i = 0; i < listOfListNodes.size() - 1; i = i + 2) {
+
+            int j = i + 1;
+            System.out.println(String.format("i=%d j=%d", i, j));
+            ListNode left = listOfListNodes.get(i);
+            ListNode right = listOfListNodes.get(j);
+            Callable<ListNode> callableTask = () -> {
+                return mergeSortedLists(left, right);
+
+            };
+
+            callableTasks.add(callableTask);
+
+
+        }
+        List<Future<ListNode>> futures = executorService.invokeAll(callableTasks);
+
+
+
+        List<ListNode> result = new ArrayList<>();
+        //add odd last element
+        if (listOfListNodes.size() % 2 != 0) {
+            result.add(listOfListNodes.getLast());
+        }
+        for (int i = 0; i < futures.size(); i++) {
+            result.add(futures.get(i).get());
+
+        }
+        return result;
+    }
+
+
+    ListNode mergeSortedLists(ListNode left, ListNode right) {
+        if(left==null){
+            return right;
+        }
+        if(right==null){
+            return left;
+        }
+        ListNode current = right;
+        ListNode merged = left;
+        ListNode previous = null;
+        while (current.getNext() != null) {
+            System.out.println(String.format("%s right element = %d", Thread.currentThread().getName(), current.getVal()));
+            System.out.println(String.format("%s left element = %d", Thread.currentThread().getName(), merged.getVal()));
+
+            while ((merged.getVal() < current.getVal()) && merged.getNext() != null) {
+                previous = merged;
+                merged = merged.getNext();
+
+            }
+            //insert between
+            ListNode newNode = new ListNode(current.getVal());
+            //new head
+           if (merged.getVal() <= newNode.getVal()) {
+                newNode.setNext(merged.getNext());
+                merged.setNext(newNode);
+                previous = newNode;
+
+            }
+           else if (previous == null) {
+                left = newNode;
+                newNode.setNext(merged);
+                merged = left;
+
+            } else {
+                previous.setNext(newNode);
+                newNode.setNext(merged);
+                previous = newNode;
+            }
+
+
+
+            current = current.getNext();
+
+        }
+        System.out.println(String.format("%s end right element = %d ", Thread.currentThread().getName(), current.getVal()));
+        while ((merged.getVal() <= current.getVal()) && merged.getNext() != null) {
+            previous = merged;
+            merged = merged.getNext();
+
+        }
+        //insert between
+        ListNode newNode = new ListNode(current.getVal());
+        //new end
+        if (newNode.getVal() > merged.getVal()) {
+            merged.setNext(newNode);
+        } else {
+            if(previous!=null ) {previous.setNext(newNode);}
+
+            if (previous == null) {
+                left = newNode;
+
+            }
+            newNode.setNext(merged);
+
+
+        }
+
+        return left;
     }
 
     public String shortestPalindromeNext(String s) throws InterruptedException, ExecutionException {
@@ -302,17 +526,15 @@ public class SolutionNext {
 
     public List<String> generateParenthesis(int n) {
 
-        return generateByteCode(n*2,n);
+        return generateByteCode(n * 2, n);
     }
-
-
 
 
     List<String> generateByteCode(int len, int n) {
         List<String> result = new ArrayList<>();
         int maxValue = (int) Math.pow(2, len);
         for (int i = 0; i < maxValue; i++) {
-            String binaryString = String.format("%" + len + "s",Integer.toBinaryString(i)).replace(' ', '0');
+            String binaryString = String.format("%" + len + "s", Integer.toBinaryString(i)).replace(' ', '0');
             long count = binaryString.chars().filter(ch -> ch == '0').count();
 
             if (count == n) {
