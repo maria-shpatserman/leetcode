@@ -32,7 +32,7 @@ public class SolutionNext {
         SolutionNext s = new SolutionNext();
         List<ListNode> listOfListNodes1 = new ArrayList<>();
 
-        ListNode l4= new ListNode(5);
+        ListNode l4 = new ListNode(5);
 
         ListNode l3 = new ListNode(4);
         l3.setNext(l4);
@@ -53,7 +53,7 @@ public class SolutionNext {
         ListNode l22 = new ListNode(0);
         ListNode l12 = new ListNode(-2);
         l12.setNext(l22);
-         listOfListNodes1.add(l12);
+        listOfListNodes1.add(l12);
         LocalTime myObj = LocalTime.now();
         System.out.println("Time before mergeSortedListsIntoOne " + myObj);
         ListNode nodes = s.mergeSortedListsIntoOne(listOfListNodes1);
@@ -66,8 +66,6 @@ public class SolutionNext {
         System.out.println(String.format("%s end result element = %d", Thread.currentThread().getName(), nodes.getVal()));
 //----------------------------
         List<ListNode> listOfListNodes2 = new ArrayList<>();
-
-
 
 
         //------
@@ -111,7 +109,7 @@ public class SolutionNext {
         listOfListNodes3.add(pl1);
         listOfListNodes3.add(pr1);
 
-        LocalTime myObj3= LocalTime.now();
+        LocalTime myObj3 = LocalTime.now();
         System.out.println("Time before mergeSortedListsIntoOne3 " + myObj3);
         ListNode nodes3 = s.mergeSortedListsIntoOne(listOfListNodes3);
         myObj3 = LocalTime.now();
@@ -121,12 +119,50 @@ public class SolutionNext {
             nodes3 = nodes3.getNext();
         }
         System.out.println(String.format("%s end result element = %d", Thread.currentThread().getName(), nodes3.getVal()));
+//-----------------------------------------
+        ListNode sp5 = new ListNode(5);
+        ListNode sp4 = new ListNode(4);
+        sp4.setNext(sp5);
+        ListNode sp3 = new ListNode(3);
+        sp3.setNext(sp4);
+        ListNode sp2 = new ListNode(2);
+        sp2.setNext(sp3);
+        ListNode sp1 = new ListNode(1);
+        sp1.setNext(sp2);
+        ListNode swapped = s.swapPairs(sp1);
+        while (swapped != null) {
+            System.out.println(String.format("%s swapped element = %d", Thread.currentThread().getName(), swapped.getVal()));
+            swapped = swapped.getNext();
+        }
 
 
     }
+
+    public ListNode swapPairs(ListNode head) {
+        if (head == null) return head;
+        if (head.getNext() == null) return head;
+        ListNode left = head;
+
+        head = left.getNext();
+        ListNode previous = null;
+        while (left != null && left.getNext() != null) {
+            ListNode right = left.getNext();
+            System.out.println(String.format(" left = %d right = %d",
+                    left.getVal(), right.getVal()));
+            ListNode temp;
+            left.setNext(right.getNext());
+            right.setNext(left);
+            if(previous!=null) previous.setNext(right);
+            previous = left;
+            left = left.getNext();
+
+        }
+        return head;
+    }
+
     public ListNode mergeKLists(ListNode[] lists) {
-        ListNode result=null;
-        if (lists.length==0) return result;
+        ListNode result = null;
+        if (lists.length == 0) return result;
         try {
             result = mergeSortedListsIntoOne(new ArrayList<>(Arrays.asList(lists)));
         } catch (ExecutionException e) {
@@ -139,13 +175,13 @@ public class SolutionNext {
 
     ListNode mergeSortedListsIntoOne(List<ListNode> listOfListNodes) throws ExecutionException, InterruptedException {
         if (listOfListNodes.size() == 1) return listOfListNodes.get(0);
-        System.out.println("start size = "+listOfListNodes.size());
+        System.out.println("start size = " + listOfListNodes.size());
         ExecutorService executorService = Executors.newFixedThreadPool(10);
-        List<ListNode> result = mergeSortedListsWithService(listOfListNodes,executorService);
+        List<ListNode> result = mergeSortedListsWithService(listOfListNodes, executorService);
 
-        while (result.size()>1){
-            System.out.println("result size = "+result.size());
-            result= mergeSortedListsWithService(result,executorService);
+        while (result.size() > 1) {
+            System.out.println("result size = " + result.size());
+            result = mergeSortedListsWithService(result, executorService);
         }
         //if list of listnodes is 1
         executorService.shutdown();
@@ -153,8 +189,7 @@ public class SolutionNext {
 
     }
 
-    List<ListNode> mergeSortedListsWithService(List<ListNode> listOfListNodes,ExecutorService executorService) throws InterruptedException, ExecutionException {
-
+    List<ListNode> mergeSortedListsWithService(List<ListNode> listOfListNodes, ExecutorService executorService) throws InterruptedException, ExecutionException {
 
 
         List<Callable<ListNode>> callableTasks = new ArrayList<>();
@@ -177,7 +212,6 @@ public class SolutionNext {
         List<Future<ListNode>> futures = executorService.invokeAll(callableTasks);
 
 
-
         List<ListNode> result = new ArrayList<>();
         //add odd last element
         if (listOfListNodes.size() % 2 != 0) {
@@ -192,10 +226,10 @@ public class SolutionNext {
 
 
     ListNode mergeSortedLists(ListNode left, ListNode right) {
-        if(left==null){
+        if (left == null) {
             return right;
         }
-        if(right==null){
+        if (right == null) {
             return left;
         }
         ListNode current = right;
@@ -213,13 +247,12 @@ public class SolutionNext {
             //insert between
             ListNode newNode = new ListNode(current.getVal());
             //new head
-           if (merged.getVal() <= newNode.getVal()) {
+            if (merged.getVal() <= newNode.getVal()) {
                 newNode.setNext(merged.getNext());
                 merged.setNext(newNode);
                 previous = newNode;
 
-            }
-           else if (previous == null) {
+            } else if (previous == null) {
                 left = newNode;
                 newNode.setNext(merged);
                 merged = left;
@@ -229,7 +262,6 @@ public class SolutionNext {
                 newNode.setNext(merged);
                 previous = newNode;
             }
-
 
 
             current = current.getNext();
@@ -247,7 +279,9 @@ public class SolutionNext {
         if (newNode.getVal() > merged.getVal()) {
             merged.setNext(newNode);
         } else {
-            if(previous!=null ) {previous.setNext(newNode);}
+            if (previous != null) {
+                previous.setNext(newNode);
+            }
 
             if (previous == null) {
                 left = newNode;

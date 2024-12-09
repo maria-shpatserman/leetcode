@@ -58,5 +58,7 @@ public class Config {
     private Resource generateParentheses;
     @Value(value = "classpath:code/23_merge_k_sorted_lists.txt")
     private Resource mergeKSortedLists;
+    @Value(value = "classpath:code/24_swap_nodes_in_pairs.txt")
+    private Resource swappedNodesInPairs;
 
 }

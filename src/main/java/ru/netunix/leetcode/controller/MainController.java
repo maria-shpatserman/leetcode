@@ -263,5 +263,15 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/getSwappedNodesInPairs")
+    public String getSwappedNodesInPairs(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getSwappedNodesInPairs().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 25. 24. Swap Nodes In Pairs";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }
