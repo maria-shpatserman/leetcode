@@ -263,5 +263,25 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/getSwappedNodesInPairs")
+    public String getSwappedNodesInPairs(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getSwappedNodesInPairs().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 25. 24. Swap Nodes In Pairs";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+    @GetMapping("/getReversedNodesInGroups")
+    public String getReversedNodeListInGroups(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getReversedNodesInGroups().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 26. 25. Reverse Nodes In k-Group";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }
