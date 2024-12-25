@@ -62,5 +62,7 @@ public class Config {
     private Resource swappedNodesInPairs;
     @Value(value = "classpath:code/25_reverse_nodes_in_k_group.txt")
     private Resource reversedNodesInGroups;
+    @Value(value = "classpath:code/30_substring_with_concatenation_all_words.txt")
+    private Resource concatenationAllWords;
 
 }
