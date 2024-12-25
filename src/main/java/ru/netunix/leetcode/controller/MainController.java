@@ -283,5 +283,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/getConcatenationAllWords")
+    public String getConcatenationAllWords(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getConcatenationAllWords().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 27. 30. Substring with Concatenation of All Words ";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+
 
 }
