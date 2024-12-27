@@ -293,6 +293,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/getIsValidSudoku")
+    public String getIsValidSudoku(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getIsValidSudoku().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 28. 36. Valid Sudoku ";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 
 }
