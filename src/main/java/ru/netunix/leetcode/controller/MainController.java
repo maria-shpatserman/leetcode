@@ -303,6 +303,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/getSudokuSolver")
+    public String getSudokuSolver(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getSudokuSolver().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 29. 37. Sudoku Solver";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 
 }

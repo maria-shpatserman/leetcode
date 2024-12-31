@@ -66,5 +66,7 @@ public class Config {
     private Resource concatenationAllWords;
     @Value(value = "classpath:code/36_valid_sudoku.txt")
     private Resource isValidSudoku;
+    @Value(value = "classpath:code/37_sudoku_solver.txt")
+    private Resource sudokuSolver;
 
 }
