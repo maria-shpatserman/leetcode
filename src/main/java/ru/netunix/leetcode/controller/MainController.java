@@ -314,5 +314,16 @@ public class MainController {
         return "task";
     }
 
+    @GetMapping("/getFirstMissingPositive")
+    public String getFirstMissingPositive(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getMissingPositive().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 30. 41. First Missing Positive";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+
 
 }

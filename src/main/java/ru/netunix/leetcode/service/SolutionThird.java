@@ -20,8 +20,8 @@ public class SolutionThird {
                 {'9', '7', '1', '8', '6', '3', '4', '2', '5'},
                 {'8', '5', '2', '4', '9', '1', '7', '3', '6'},
                 {'4', '8', '6', '2', '7', '5', '9', '1', '3'}};
-        boolean validSudoku = s.isValidSudoku(testBoard);
-        System.out.println("validSudoku =" + validSudoku);
+//        boolean validSudoku = s.isValidSudoku(testBoard);
+//        System.out.println("validSudoku =" + validSudoku);
 
 
         char[][] board = {
@@ -47,8 +47,16 @@ public class SolutionThird {
 
 //        boolean validSudoku = s.isValidSudoku(board);
 //        System.out.println("RESULT = " + validSudoku);
-        System.out.println("INCOMING = " + Arrays.deepToString(board));
-        s.solveSudoku(board);
+//        System.out.println("INCOMING = " + Arrays.deepToString(board));
+//        s.solveSudoku(board);
+
+//        int[] nums = {20, 1, 0, 10, -2, 2, 7, 3, 4, 1, 5, 2};
+        int[] nums = {100000, 3, 4000, 2, 15, 1, 99999};
+        System.out.println("INCOMING NUMS = " + Arrays.toString(nums));
+        int result = s.firstMissingPositive(nums);
+        System.out.println("RESULT FIRST MISSING POSITIVE = " + result);
+
+
     }
 
 
@@ -144,7 +152,6 @@ public class SolutionThird {
                 }
             }
         }
-
 
 
         System.out.println(Arrays.deepToString(board));
@@ -326,6 +333,7 @@ public class SolutionThird {
         result.removeAll(fulFilledChars);
         return result;
     }
+
     public List<Character> getFullFilledCharsForSquare(int lineNumber, int columnNumber, char[][] board) {
         List<Character> result = new ArrayList<>();
         for (int i = lineNumber; i < 3 + lineNumber; i++) {
@@ -363,5 +371,49 @@ public class SolutionThird {
             for (int j = 0; j < 9; j++)
                 result[i][j] = board[i][j];
         return result;
+    }
+
+    public int firstMissingPositive(int[] nums) {
+        nums = sortCycle(nums);
+        System.out.println("SORTED NUMS = " + Arrays.toString(nums));
+
+        int result =1;
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i]!=result){
+                return result;
+            }
+            else {
+                result = result+1;
+            }
+        }
+
+        return result;
+
+    }
+
+    public int[] sortCycle(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            while (nums[i] > 0 && !isOnCorrectIndex(i, nums[i]) && isAvailableToSwap(nums[i], nums)) {
+                int temp = nums[i];
+                nums[i] = nums[temp-1];
+                nums[temp-1]=temp;
+
+            }
+            System.out.println("INDEX ["+i+"] CURRENT NUMS = " + Arrays.toString(nums));
+        }
+        return nums;
+    }
+
+    public boolean isOnCorrectIndex(int indexNumber, int value) {
+        if (value == (indexNumber + 1)) return true;
+        return false;
+
+    }
+
+    public boolean isAvailableToSwap(int value, int[] nums) {
+        if (value > nums.length) return false;
+        if (value != nums[value - 1]) return true;
+        return false;
+
     }
 }
