@@ -68,5 +68,7 @@ public class Config {
     private Resource isValidSudoku;
     @Value(value = "classpath:code/37_sudoku_solver.txt")
     private Resource sudokuSolver;
+    @Value(value = "classpath:code/41_first_missing_positive.txt")
+    private Resource missingPositive;
 
 }

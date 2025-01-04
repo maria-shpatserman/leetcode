@@ -1,0 +1,42 @@
+class Solution {
+  public int firstMissingPositive(int[] nums) {
+        nums = sortCycle(nums);
+        int result =1;
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i]!=result){
+                return result;
+            }
+            else {
+                result = result+1;
+            }
+        }
+
+        return result;
+
+    }
+
+    public int[] sortCycle(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            while (nums[i] > 0 && !isOnCorrectIndex(i, nums[i]) && isAvailableToSwap(nums[i], nums)) {
+                int temp = nums[i];
+                nums[i] = nums[temp-1];
+                nums[temp-1]=temp;
+
+            }
+        }
+        return nums;
+    }
+
+    public boolean isOnCorrectIndex(int indexNumber, int value) {
+        if (value == (indexNumber + 1)) return true;
+        return false;
+
+    }
+
+    public boolean isAvailableToSwap(int value, int[] nums) {
+        if (value > nums.length) return false;
+        if (value != nums[value - 1]) return true;
+        return false;
+
+    }
+}
