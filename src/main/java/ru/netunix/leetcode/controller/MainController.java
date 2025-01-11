@@ -324,6 +324,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/getInsertPosition")
+    public String getInsertPosition(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getSearchInsertPosition().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 31. 35. Search  Insert Position";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 
 }

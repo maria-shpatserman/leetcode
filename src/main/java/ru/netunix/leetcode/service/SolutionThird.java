@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class SolutionThird {
@@ -47,15 +49,18 @@ public class SolutionThird {
 
 //        boolean validSudoku = s.isValidSudoku(board);
 //        System.out.println("RESULT = " + validSudoku);
-//        System.out.println("INCOMING = " + Arrays.deepToString(board));
-//        s.solveSudoku(board);
+        System.out.println("INCOMING = " + Arrays.deepToString(board));
+        s.solveSudoku(board);
 
 //        int[] nums = {20, 1, 0, 10, -2, 2, 7, 3, 4, 1, 5, 2};
         int[] nums = {100000, 3, 4000, 2, 15, 1, 99999};
         System.out.println("INCOMING NUMS = " + Arrays.toString(nums));
         int result = s.firstMissingPositive(nums);
         System.out.println("RESULT FIRST MISSING POSITIVE = " + result);
-
+        String s1 = "aa";
+        String p1 = "a*B";
+        boolean match = s.isMatch(s1, p1);
+        System.out.println("RESULT isMatch ---->>>>> " + match);
 
     }
 
@@ -377,13 +382,12 @@ public class SolutionThird {
         nums = sortCycle(nums);
         System.out.println("SORTED NUMS = " + Arrays.toString(nums));
 
-        int result =1;
+        int result = 1;
         for (int i = 0; i < nums.length; i++) {
-            if(nums[i]!=result){
+            if (nums[i] != result) {
                 return result;
-            }
-            else {
-                result = result+1;
+            } else {
+                result = result + 1;
             }
         }
 
@@ -395,11 +399,11 @@ public class SolutionThird {
         for (int i = 0; i < nums.length; i++) {
             while (nums[i] > 0 && !isOnCorrectIndex(i, nums[i]) && isAvailableToSwap(nums[i], nums)) {
                 int temp = nums[i];
-                nums[i] = nums[temp-1];
-                nums[temp-1]=temp;
+                nums[i] = nums[temp - 1];
+                nums[temp - 1] = temp;
 
             }
-            System.out.println("INDEX ["+i+"] CURRENT NUMS = " + Arrays.toString(nums));
+            System.out.println("INDEX [" + i + "] CURRENT NUMS = " + Arrays.toString(nums));
         }
         return nums;
     }
@@ -416,4 +420,25 @@ public class SolutionThird {
         return false;
 
     }
+
+    public boolean isMatch(String s, String p) {
+        boolean result = false;
+        if (p.length() == 0) return false;
+//        if (p.length() > s.length()) return false;
+//        Pattern pattern = Pattern.compile(p);
+//        Matcher m = pattern.matcher(s);
+//        result= m.matches();
+
+
+        return result;
+
+    }
+
+    public int searchInsert(int[] nums, int target) {
+        for(int i = 0;i<nums.length;i++){
+            if(nums[i]==target) return i;
+        }
+        return nums.length;
+    }
+
 }
