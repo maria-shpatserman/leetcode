@@ -70,5 +70,6 @@ public class Config {
     private Resource sudokuSolver;
     @Value(value = "classpath:code/41_first_missing_positive.txt")
     private Resource missingPositive;
-
+    @Value(value = "classpath:code/35_search_insert_position.txt")
+    private Resource searchInsertPosition;
 }
