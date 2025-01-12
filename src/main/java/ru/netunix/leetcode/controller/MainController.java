@@ -33,7 +33,7 @@ public class MainController {
     public String showAnswerValidAnagram(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getValidAnagram().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-        String taskName = "Task 01. 242. Valid Anagram";
+        String taskName = "Task 242. Valid Anagram";
         model.addAttribute("taskName", taskName);
         return "task";
     }
@@ -42,7 +42,7 @@ public class MainController {
     public String showAnswerMergeSortedArrays(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getMergeSortedArrays().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-        String taskName = "Task 02. 88. Merge Sorted Arrays";
+        String taskName = "Task 88. Merge Sorted Arrays";
         model.addAttribute("taskName", taskName);
         return "task";
     }
@@ -51,7 +51,7 @@ public class MainController {
     public String showAnswerPlusOne(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getPlusOne().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-        String taskName = "Task 03. 66. Plus One";
+        String taskName = "Task 66. Plus One";
         model.addAttribute("taskName", taskName);
         return "task";
     }
@@ -60,7 +60,7 @@ public class MainController {
     public String showSqrtX(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getSqrtX().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-        String taskName = "Task 04. 69. Sqrt(x)";
+        String taskName = "Task 69. Sqrt(x)";
         model.addAttribute("taskName", taskName);
         return "task";
     }
@@ -69,7 +69,7 @@ public class MainController {
     public String showRemoveDuplicates(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getRmvDuplicates().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-        String taskName = "Task 05. 83. Remove Duplicates from Sorted List";
+        String taskName = "Task 83. Remove Duplicates from Sorted List";
         model.addAttribute("taskName", taskName);
         return "task";
     }
@@ -78,7 +78,7 @@ public class MainController {
     public String getMajorityElement(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getMjrElement().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-        String taskName = "Task 06. 169. Majority element";
+        String taskName = "Task 169. Majority element";
         model.addAttribute("taskName", taskName);
         return "task";
 
@@ -88,7 +88,7 @@ public class MainController {
     public String getContainsDuplicateSecond(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getContainsDuplicates2().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-        String taskName = "Task 07. 219. Contains Duplicate II";
+        String taskName = "Task 219. Contains Duplicate II";
         model.addAttribute("taskName", taskName);
         return "task";
 
@@ -98,17 +98,17 @@ public class MainController {
     public String getConvertTheTemperature(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getConvertTemperature().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-        String taskName = "Task 08. 2469. Convert The Temperature";
+        String taskName = "Task 2469. Convert The Temperature";
         model.addAttribute("taskName", taskName);
         return "task";
     }
 
-    //todo refactoring remove enormous amount of task- html make template with variable
+
     @GetMapping("/getTwoSumIndexes")
     public String getTwoSumIndexes(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getTwoSum().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-        String taskName = "Task 09. 1. Two Sum";
+        String taskName = "Task 1. Two Sum";
         model.addAttribute("taskName", taskName);
         return "task";
     }
@@ -117,7 +117,7 @@ public class MainController {
     public String getAddTwoNumbersLinkedList(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getAddTwoNumbers().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
-        String taskName = "Task 10. 2. Add Two Numbers";
+        String taskName = "Task 2. Add Two Numbers";
         model.addAttribute("taskName", taskName);
         return "task";
     }
@@ -127,7 +127,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getLongestSubstring().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 11. 3. Longest Substring Without Repeating Characters";
+        String taskName = "Task 3. Longest Substring Without Repeating Characters";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -138,7 +138,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getMedianTwoSortedArrays().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 12. 4. Median of Two Sorted Arrays";
+        String taskName = "Task 4. Median of Two Sorted Arrays";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -148,7 +148,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getLongestPalindromicSubstring().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 13. 5. Longest Palindromic Substring";
+        String taskName = "Task 5. Longest Palindromic Substring";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -158,7 +158,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getMostWaterContainer().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 14. 11. Container With Most Water";
+        String taskName = "Task 11. Container With Most Water";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -168,7 +168,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getZigzagConversion().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 15. 6. ZigZag Conversion";
+        String taskName = "Task 6. ZigZag Conversion";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -178,7 +178,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getReverseInteger().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 16. 7. Reverse Integer";
+        String taskName = "Task 7. Reverse Integer";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -188,7 +188,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getStringToIntegerAtoi().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 17. 8. String to Integer (atoi)";
+        String taskName = "Task 8. String to Integer (atoi)";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -198,7 +198,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getLetterCombinations().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 18. 17. Letter Combinations of a Phone Number";
+        String taskName = "Task 17. Letter Combinations of a Phone Number";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -208,7 +208,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getThreeSum().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 19. 15. 3 Sum";
+        String taskName = "Task 15. 3 Sum";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -218,7 +218,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getFourSum().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 20. 18. 4 Sum";
+        String taskName = "Task 18. 4 Sum";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -228,7 +228,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getThreeSumClosest().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 21. 16. 3 Sum Closest";
+        String taskName = "Task 16. 3 Sum Closest";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -238,7 +238,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getRemoveNthElement().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 22. 19. Remove Nth Node from The End of The List";
+        String taskName = "Task 19. Remove Nth Node from The End of The List";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -248,7 +248,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getGenerateParentheses().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 23. 22. Generate Parentheses";
+        String taskName = "Task 22. Generate Parentheses";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -258,7 +258,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getMergeKSortedLists().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 24. 23. Merge k Sorted Lists";
+        String taskName = "Task 23. Merge k Sorted Lists";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -268,7 +268,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getSwappedNodesInPairs().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 25. 24. Swap Nodes In Pairs";
+        String taskName = "Task 24. Swap Nodes In Pairs";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -278,7 +278,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getReversedNodesInGroups().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 26. 25. Reverse Nodes In k-Group";
+        String taskName = "Task 25. Reverse Nodes In k-Group";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -288,7 +288,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getConcatenationAllWords().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 27. 30. Substring with Concatenation of All Words ";
+        String taskName = "Task 30. Substring with Concatenation of All Words ";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -298,7 +298,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getIsValidSudoku().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 28. 36. Valid Sudoku ";
+        String taskName = "Task 36. Valid Sudoku ";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -308,7 +308,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getSudokuSolver().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 29. 37. Sudoku Solver";
+        String taskName = "Task 37. Sudoku Solver";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -319,7 +319,7 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getMissingPositive().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 30. 41. First Missing Positive";
+        String taskName = "Task 41. First Missing Positive";
         model.addAttribute("taskName", taskName);
 
         return "task";
@@ -329,7 +329,17 @@ public class MainController {
         String code = StreamUtils.copyToString(configuration.getSearchInsertPosition().getInputStream(), Charset.defaultCharset());
         model.addAttribute("code", code);
         //taskName
-        String taskName = "Task 31. 35. Search  Insert Position";
+        String taskName = "Task 35. Search  Insert Position";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+    @GetMapping("/getDivideTwoIntegers")
+    public String getDivideTwoIntegers(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getDivideTwoIntegers().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 29. Divide  Two Integers";
         model.addAttribute("taskName", taskName);
 
         return "task";
