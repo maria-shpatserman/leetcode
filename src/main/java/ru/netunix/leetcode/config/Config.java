@@ -72,4 +72,7 @@ public class Config {
     private Resource missingPositive;
     @Value(value = "classpath:code/35_search_insert_position.txt")
     private Resource searchInsertPosition;
+    @Value(value = "classpath:code/29_divide_two_integers.txt")
+    private Resource divideTwoIntegers;
+
 }

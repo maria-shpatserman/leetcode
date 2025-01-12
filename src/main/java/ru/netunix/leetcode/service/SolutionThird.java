@@ -50,7 +50,7 @@ public class SolutionThird {
 //        boolean validSudoku = s.isValidSudoku(board);
 //        System.out.println("RESULT = " + validSudoku);
         System.out.println("INCOMING = " + Arrays.deepToString(board));
-        s.solveSudoku(board);
+//        s.solveSudoku(board);
 
 //        int[] nums = {20, 1, 0, 10, -2, 2, 7, 3, 4, 1, 5, 2};
         int[] nums = {100000, 3, 4000, 2, 15, 1, 99999};
@@ -61,6 +61,9 @@ public class SolutionThird {
         String p1 = "a*B";
         boolean match = s.isMatch(s1, p1);
         System.out.println("RESULT isMatch ---->>>>> " + match);
+
+        int divided = s.divide(-2147483648, -1);
+        System.out.println("RESULT divided ---->>>>> " +divided);
 
     }
 
@@ -435,10 +438,47 @@ public class SolutionThird {
     }
 
     public int searchInsert(int[] nums, int target) {
-        for(int i = 0;i<nums.length;i++){
-            if(nums[i]==target) return i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target) return i;
         }
         return nums.length;
+    }
+
+    public int divide(int dividend, int divisor) {
+        if (dividend == 0) return 0;
+        if((dividend == -2147483648 )&&(divisor ==-1)) return 2147483647;
+        if (divisor == 1) return dividend;
+        if (divisor == -1) return changeSignOfNumber(dividend);
+        boolean isNegativeResult = isNegativeResult(dividend, divisor);
+        int negativeDividend =(dividend>0)?changeSignOfNumber(dividend):dividend;
+        int negativeDivisor = (divisor>0)?changeSignOfNumber(divisor):divisor;
+        int result = getQuotient(negativeDividend, negativeDivisor);
+        if (isNegativeResult) {
+            result = changeSignOfNumber(result);
+        }
+        return result;
+
+    }
+
+    int changeSignOfNumber(int number) {
+        return 0 - number;
+    }
+
+    int getQuotient(int dividend, int divisor) {
+        int result = 0;
+        while (dividend <= divisor) {
+            dividend = dividend - divisor;
+            result = result + 1;
+
+        }
+        return result;
+    }
+
+
+
+    boolean isNegativeResult(int dividend, int divisor) {
+        if ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) return true;
+        return false;
     }
 
 }
