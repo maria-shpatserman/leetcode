@@ -1,13 +1,11 @@
 package ru.netunix.leetcode.service;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class SolutionThird {
     public static void main(String[] args) {
@@ -63,8 +61,12 @@ public class SolutionThird {
         System.out.println("RESULT isMatch ---->>>>> " + match);
 
         int divided = s.divide(-2147483648, -1);
-        System.out.println("RESULT divided ---->>>>> " +divided);
+        System.out.println("RESULT divided ---->>>>> " + divided);
 
+//        System.out.println("RESULT of MULTIPLY ->>>>>> " + s.multiply("3866762897776739956", "15975363164662"));
+        System.out.println("RESULT of MULTIPLY ->>>>>> " + s.multiply("123456789", "987654321"));
+//        System.out.println("RESULT of MULTIPLY ->>>>>> " + s.multiply("123", "98"));
+//121932631112635269 - expected
     }
 
 
@@ -446,12 +448,12 @@ public class SolutionThird {
 
     public int divide(int dividend, int divisor) {
         if (dividend == 0) return 0;
-        if((dividend == -2147483648 )&&(divisor ==-1)) return 2147483647;
+        if ((dividend == -2147483648) && (divisor == -1)) return 2147483647;
         if (divisor == 1) return dividend;
         if (divisor == -1) return changeSignOfNumber(dividend);
         boolean isNegativeResult = isNegativeResult(dividend, divisor);
-        int negativeDividend =(dividend>0)?changeSignOfNumber(dividend):dividend;
-        int negativeDivisor = (divisor>0)?changeSignOfNumber(divisor):divisor;
+        int negativeDividend = (dividend > 0) ? changeSignOfNumber(dividend) : dividend;
+        int negativeDivisor = (divisor > 0) ? changeSignOfNumber(divisor) : divisor;
         int result = getQuotient(negativeDividend, negativeDivisor);
         if (isNegativeResult) {
             result = changeSignOfNumber(result);
@@ -475,10 +477,113 @@ public class SolutionThird {
     }
 
 
-
     boolean isNegativeResult(int dividend, int divisor) {
         if ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) return true;
         return false;
     }
 
+    //   return new StringBuilder(intToStr).reverse().toString();
+    public String multiply(String num1, String num2) {
+        String result = "";
+        if(num1.equals("0") ||num2.equals("0")){
+            return "0";
+        }
+        List<String> listTemp = new ArrayList<>();
+        String reversedNum2 = new StringBuilder(num2).reverse().toString();
+        StringBuilder postfix = new StringBuilder();
+        for (int i = 0; i < reversedNum2.length(); i++) {
+            String temp2 =getStringMultipliedByInt(num1, getIntFromChar(reversedNum2.substring(i, i + 1)), postfix.toString());
+            listTemp.add(temp2);
+            postfix.append("0");
+        }
+        int[][] matrix = getMatrix(listTemp);
+        result = getMultipliedFromMatrix(matrix);
+        return result;
+
+    }
+
+    public String getMultipliedFromMatrix(int[][] matrix) {
+        int n = matrix.length;
+        int m = matrix[0].length;
+        String result = "";
+
+
+        int summary = 0;
+        for (int j = m - 1; j >= 0; j--) {
+
+            for (int i = 0; i < n; i++) {
+                summary = summary + matrix[i][j];
+            }
+            int mod = summary % 10;
+            result = String.valueOf(mod) + result;
+            summary = summary / 10;
+
+        }
+        if(summary>0) {
+            result = String.valueOf(summary) + result;
+        }
+        return result;
+
+    }
+    public String getStringMultipliedByInt(String num, int number,String postfix){
+        String result =postfix;
+        String reversedNum2 = new StringBuilder(num).reverse().toString();
+        int nextTens=0;
+        for (int i = 0; i < reversedNum2.length(); i++) {
+            int temp = number*getIntFromChar(reversedNum2.substring(i, i + 1))+nextTens;
+            int mod = (temp) % 10;
+            result = String.valueOf(mod) + result;
+            nextTens = (temp) / 10;
+        }
+        if(nextTens>0) {
+            result = String.valueOf(nextTens) + result;
+        }
+       return result;
+    }
+
+    public int[][] getMatrix(List<String> multiplies) {
+
+        int n = multiplies.size();
+        int m = multiplies.get(multiplies.size() - 1).length();
+        int[][] result = new int[n][m];
+
+        for (int i = 0; i < n; i++) {
+            String value = multiplies.get(i);
+            int k = value.length() - 1;
+            for (int j = m - 1; j >= 0; j--) {
+
+                    if (k >= 0) {
+                        int sf = getIntFromChar(value.substring(k, k + 1));
+                        result[i][j] = sf;
+                        k = k - 1;
+                    } else {
+                        result[i][j] = 0;
+                    }
+                }
+
+            }
+
+
+        return result;
+    }
+
+
+
+    int getIntFromChar(String num) {
+        return switch (num) {
+            case "0" -> 0;
+            case "1" -> 1;
+            case "2" -> 2;
+            case "3" -> 3;
+            case "4" -> 4;
+            case "5" -> 5;
+            case "6" -> 6;
+            case "7" -> 7;
+            case "8" -> 8;
+            case "9" -> 9;
+            default -> throw new RuntimeException("Incorrect symbol");
+
+        };
+
+    }
 }
