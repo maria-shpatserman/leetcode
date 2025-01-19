@@ -75,4 +75,7 @@ public class Config {
     @Value(value = "classpath:code/29_divide_two_integers.txt")
     private Resource divideTwoIntegers;
 
+    @Value(value = "classpath:code/43_multiply_strings.txt")
+    private Resource multiplyStrings;
+
 }

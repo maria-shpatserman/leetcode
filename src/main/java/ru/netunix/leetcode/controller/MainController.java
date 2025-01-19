@@ -344,6 +344,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/getMultiplyStrings")
+    public String getMultiplyStrings(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getMultiplyStrings().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 43. Multiply Strings";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 
 }
