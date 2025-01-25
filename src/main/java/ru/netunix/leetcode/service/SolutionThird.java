@@ -10,7 +10,7 @@ import java.util.Set;
 public class SolutionThird {
     public static void main(String[] args) {
         SolutionThird s = new SolutionThird();
-
+/*
         char[][] testBoard = {{'3', '1', '9', '7', '4', '8', '6', '5', '2'},
                 {'7', '4', '3', '6', '5', '2', '1', '8', '9'},
                 {'6', '2', '5', '1', '3', '9', '8', '7', '4'},
@@ -34,7 +34,7 @@ public class SolutionThird {
                 {'.', '.', '.', '8', '.', '3', '.', '2', '.'},
                 {'.', '.', '.', '.', '.', '.', '.', '.', '6'},
                 {'.', '.', '.', '2', '7', '5', '9', '.', '.'}};
-       /* char[][] board ={
+        char[][] board ={
                 {'5','3','.','.','7','.','.','.','.'},
                 {'6','.','.','1','9','5','.','.','.'},
                 {'.','9','8','.','.','.','.','6','.'},
@@ -43,7 +43,7 @@ public class SolutionThird {
                 {'7','.','.','.','2','.','.','.','6'},
                 {'.','6','.','.','.','.','2','8','.'},
                 {'.','.','.','4','1','9','.','.','5'},
-                {'.','.','.','.','8','.','.','7','9'}};*/
+                {'.','.','.','.','8','.','.','7','9'}};
 
 //        boolean validSudoku = s.isValidSudoku(board);
 //        System.out.println("RESULT = " + validSudoku);
@@ -67,6 +67,12 @@ public class SolutionThird {
         System.out.println("RESULT of MULTIPLY ->>>>>> " + s.multiply("123456789", "987654321"));
 //        System.out.println("RESULT of MULTIPLY ->>>>>> " + s.multiply("123", "98"));
 //121932631112635269 - expected
+        */
+        int[] nums = {5, 7, 7, 8, 8, 10, 12};
+        int[] range = s.searchRange(nums, 8);
+        System.out.println("RESULT of searchRange ->>>>> " + Arrays.toString(range));
+
+
     }
 
 
@@ -485,14 +491,14 @@ public class SolutionThird {
     //   return new StringBuilder(intToStr).reverse().toString();
     public String multiply(String num1, String num2) {
         String result = "";
-        if(num1.equals("0") ||num2.equals("0")){
+        if (num1.equals("0") || num2.equals("0")) {
             return "0";
         }
         List<String> listTemp = new ArrayList<>();
         String reversedNum2 = new StringBuilder(num2).reverse().toString();
         StringBuilder postfix = new StringBuilder();
         for (int i = 0; i < reversedNum2.length(); i++) {
-            String temp2 =getStringMultipliedByInt(num1, getIntFromChar(reversedNum2.substring(i, i + 1)), postfix.toString());
+            String temp2 = getStringMultipliedByInt(num1, getIntFromChar(reversedNum2.substring(i, i + 1)), postfix.toString());
             listTemp.add(temp2);
             postfix.append("0");
         }
@@ -519,26 +525,27 @@ public class SolutionThird {
             summary = summary / 10;
 
         }
-        if(summary>0) {
+        if (summary > 0) {
             result = String.valueOf(summary) + result;
         }
         return result;
 
     }
-    public String getStringMultipliedByInt(String num, int number,String postfix){
-        String result =postfix;
+
+    public String getStringMultipliedByInt(String num, int number, String postfix) {
+        String result = postfix;
         String reversedNum2 = new StringBuilder(num).reverse().toString();
-        int nextTens=0;
+        int nextTens = 0;
         for (int i = 0; i < reversedNum2.length(); i++) {
-            int temp = number*getIntFromChar(reversedNum2.substring(i, i + 1))+nextTens;
+            int temp = number * getIntFromChar(reversedNum2.substring(i, i + 1)) + nextTens;
             int mod = (temp) % 10;
             result = String.valueOf(mod) + result;
             nextTens = (temp) / 10;
         }
-        if(nextTens>0) {
+        if (nextTens > 0) {
             result = String.valueOf(nextTens) + result;
         }
-       return result;
+        return result;
     }
 
     public int[][] getMatrix(List<String> multiplies) {
@@ -552,21 +559,20 @@ public class SolutionThird {
             int k = value.length() - 1;
             for (int j = m - 1; j >= 0; j--) {
 
-                    if (k >= 0) {
-                        int sf = getIntFromChar(value.substring(k, k + 1));
-                        result[i][j] = sf;
-                        k = k - 1;
-                    } else {
-                        result[i][j] = 0;
-                    }
+                if (k >= 0) {
+                    int sf = getIntFromChar(value.substring(k, k + 1));
+                    result[i][j] = sf;
+                    k = k - 1;
+                } else {
+                    result[i][j] = 0;
                 }
-
             }
+
+        }
 
 
         return result;
     }
-
 
 
     int getIntFromChar(String num) {
@@ -585,5 +591,24 @@ public class SolutionThird {
 
         };
 
+    }
+
+    public int[] searchRange(int[] nums, int target) {
+        if (nums.length == 0) return new int[]{-1, -1};
+        if (nums.length == 1 && nums[0] == target) return new int[]{1, 1};
+        if (nums.length == 1) return new int[]{-1, -1};
+        if (nums[0] > target) return new int[]{-1, -1};
+        if (nums[nums.length - 1] < target) return new int[]{-1, -1};
+        int leftIndex = -1;
+        int rightIndex = -1;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i]==target && leftIndex ==-1){
+                leftIndex = i;
+            }
+            if(nums[i] == target) rightIndex=i;
+            if(nums[i]>target) return new int[]{leftIndex, rightIndex};
+        }
+
+        return new int[]{leftIndex, rightIndex};
     }
 }
