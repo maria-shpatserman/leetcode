@@ -355,5 +355,16 @@ public class MainController {
         return "task";
     }
 
+    @GetMapping("/getElementInSortedArray")
+    public String getElementInSortedArray(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getFindElementInSortedArray().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 34. Find First and Last Position of Element in Sorted Array";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+
 
 }
