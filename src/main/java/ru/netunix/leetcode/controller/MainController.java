@@ -365,6 +365,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/getLongestValidParentheses")
+    public String getLongestValidParentheses(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getLongestValidParentheses().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 32. Longest Valid Parentheses";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 
 }

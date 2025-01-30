@@ -80,6 +80,9 @@ public class Config {
 
     @Value(value = "classpath:code/34_find_first_and_last_position_of_element_in_sorted_array.txt")
     private Resource findElementInSortedArray;
-    //34_find_first_and_last_position_of_element_in_sorted_array.txt
+
+    @Value(value = "classpath:code/32_longest_valid_parentheses.txt")
+    private Resource longestValidParentheses;
+
 
 }

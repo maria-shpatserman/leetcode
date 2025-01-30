@@ -1,11 +1,13 @@
 package ru.netunix.leetcode.service;
 
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 public class SolutionThird {
     public static void main(String[] args) {
@@ -69,8 +71,22 @@ public class SolutionThird {
 //121932631112635269 - expected
         */
         int[] nums = {5, 7, 7, 8, 8, 10, 12};
-        int[] range = s.searchRange(nums, 8);
-        System.out.println("RESULT of searchRange ->>>>> " + Arrays.toString(range));
+//        int[] range = s.searchRange(nums, 8);
+//        System.out.println("RESULT of searchRange ->>>>> " + Arrays.toString(range));
+
+        ///
+//        String parenthesisCheck = ")(())(()))(((())))(((((()()))))))((((()()(()()())())())()))";
+        //()()()())(())()()(((()))))()";
+//        ((()))(((())()((()()())((())))(())))())((()())()()((()((())))))((()(((((()((()))(()()(())))((()))()))())";
+//        String parenthesisCheck = ")(()(()(((())(((((()()))((((()()(()()())())())()))()()()())(())()()(((()))))()((()))(((())()((()()())((())))(())))())((()())()()((()((())))))((()(((((()((()))(()()(())))((()))()))())";
+        LocalTime myObj = LocalTime.now();
+        System.out.println("Time before longestValidParentheses " + myObj);
+        String parenthesisCheck = "())((()()(()(((()())))))))((((((())()(()()(())()))(()))(()()())((((((()())()()()(()))())(((()(()(())(()((()())())))((()(((()(()((()())())))(())))()))))))))))())()))((())()()()()))((()))(((()))()(()))()((()()()(()))(((()()()()((()()(()())))(())))))))()))))()))()((()())())(()))(((()()()((())())())(((())((()))(())(())()))))(())))()())())()(()))))(())))(())))(()((())(())))((()(()))((((()))))()((()()()())()(())(()(()()())()((())(()((()()()())()))((()))))()))())))))))()((()()))()()()()))(()()()()(())()(()))))()(((((()(((((((()(((())()))(()())()(()))(()(()((()((((()))))()(())(()))))()(()(((((((()))((()(()(()))(()())(()())()(())()(()((((()))))()()()(((())()())()))())()(())))(()()))))(())))))((((()))))(((((()))((((()))((())))))((())))())((((((((()(()((())))()))()()))))))))(((()(()())(()))((())((())(()))))))))((())()()())(()(())()))))((())())(()(())((()())))))((())((())())()(()))(())()()()((((()(()()))()(()(((((()())())())))())()))()))(()())()((()()()()((())()())(((())(((()(()()(((((((()(((()((((()(()((())))())())(())()(()())()((())()()()))()(()())()))()())))()()())))()(((((()()))(())(((()())))(())(())())(())(()()())))()())()))(()))))(()())()(()))((((())()())(())(((()())(()((((((((()))((((())())()((()()())())()()()())()()((()())(()()))((()()))()))(((()((()()(()))()(())()())((())())()(((())))(())((()((())(()()()(()(()))((()((((()(()()(())(()()))))(())()(()()))))())()((())(()))()()(()()()((()))(()))))())((()(()((";
+//        ())()()(())((()(()()(((()))((((())((()(())()())(()((((()))()(()))(())()(())(()(((((())((((((()())())(()(()((())()))(()))))))()(()))((((())()()()))()()()(((()(()())(()()(()(()()(((()))))))()()))())())((()()))))))((()))(((()((())()(()()))((())))()()())))))))()))))(()))))()))()))()((())))((()))(()))))))(((()))))))))()(()()()(())((())()))()()(())))()()))(()())()))(((()())()))((())((((()))(()(()(()()()(((())()(((((()))((()(((((())(()()))((((((((()(()(()(()(())))(())(()())())(()((((()(())((()(())))(())))()(((((()(()()(())))))))())(())(())(()()(((())))((()))(((((()))))())))()((()))()))))())))))((())(((((()()))((((())))(((()(()(())())(((()(()(()()()())))())()))((()((())())()()()(((())(((((()((((((()((()())))((((())((()(((((((()(()((()()()(()(()())(()(()()((((())))()(((()())))(()()))()(()()()()(((((())(()))))((()))())))()((((((()))())))()(()))(())))((((()())(((((()()())(((((())(()())(()))))()(()()))()))))))())))(((())(()(()()))(()))()(((())))())((((()(((()))))))()(()(()))()()(()()))))))))((()))))))(())((()((()))()))((((((()())))))(()((())((((()))))(()(()()()()(()))()()(()(()))(()()(((((((()())(())(()())((())())()(()())((())()())())(()())))())))(())())())(())((()())(((()()))()))()()))()(()(())((((((((())))()((())((()((((((((((()))))(()(((((())(()(()())())))((())())))))()))(()((()()))((()((())()()()((()(())())((())())(()()(((())))))())()()(()))()())(()(()((())))((((()()(())))())(())(()(()(())())())(()()())()(())())))(()()(((())))((()()(((())()()(()())((((()()(()())(()((((()(()()(()(()(((()((()())(()()))(()((((()(((((()))))()()))(((()((((((()(()()()()())()))(()(())))))((()(((()())())))(((()()))(()(()(((((((()()))(()(())))())()(())())(())(()))(())(()))()()(()()())))))()))()((())(((()((((((((())()()))())))((()())(";
+        int len = s.longestValidParentheses(parenthesisCheck);
+        System.out.println("RESULT sValid --->>>> " + len);
+        myObj = LocalTime.now();
+        System.out.println("Time after longestValidParentheses " + myObj);
 
 
     }
@@ -602,13 +618,170 @@ public class SolutionThird {
         int leftIndex = -1;
         int rightIndex = -1;
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i]==target && leftIndex ==-1){
+            if (nums[i] == target && leftIndex == -1) {
                 leftIndex = i;
             }
-            if(nums[i] == target) rightIndex=i;
-            if(nums[i]>target) return new int[]{leftIndex, rightIndex};
+            if (nums[i] == target) rightIndex = i;
+            if (nums[i] > target) return new int[]{leftIndex, rightIndex};
         }
 
         return new int[]{leftIndex, rightIndex};
+    }
+
+    int longestValidParenthesesSecond(String s) {
+        if (s.isEmpty()) return 0;
+        if (s.length() == 1) return 0;
+        if (s.equals("()")) return 2;
+        if (s.length() == 2) return 0;
+        System.out.println("s length = " + s.length());
+        int maxSize = (s.length() % 2 == 0) ? s.length() : s.length() - 1;
+
+        for (int i = maxSize; i > 2; i = i - 2) {
+            System.out.println("Check variant i= " + i);
+            String[] arrayOfVariants = getArrayOfVariants(s, i);
+            for (int j = 0; j < arrayOfVariants.length; j++) {
+                String current = arrayOfVariants[j];
+                System.out.println("Check variant i= " + i + " variant = " + current);
+                long countLeftParentheses = current.chars().filter(c -> c == '(').count();
+                System.out.println("Check countLeftParentheses = " + countLeftParentheses);
+                if (countLeftParentheses == i / 2) {
+                    char[] charArray = current.toCharArray();
+                    if (charArray[0] == '(' && charArray[charArray.length - 1] == ')') {
+                        if (isValid(current)) {
+                            System.out.println("!!!!---> is Valid !!!!  variant i= " + i + " variant = " + current);
+                            return i;
+                        }
+
+                    }
+                }
+            }
+        }
+        if (s.contains("()")) return 2;
+
+
+        return 0;
+
+    }
+
+    public String[] getArrayOfVariants(String s, int n) {
+        int len = s.length() - n + 1;
+        HashSet<String> result = new HashSet<>();
+        for (int i = 0; i < len; i++) {
+            String current = s.substring(i, i + n);
+            result.add(current);
+
+        }
+        return result.toArray(new String[0]);
+    }
+
+    int longestValidParenthesesVariant1(String s) {
+        if (s.isEmpty()) return 0;
+        if (s.length() == 1) return 0;
+        if (s.equals("()")) return 2;
+        if (s.length() == 2) return 0;
+        char[] charArray = s.toCharArray();
+        if (charArray[0] != '(')
+            return longestValidParenthesesVariant1(s.substring(1));
+        if (charArray[charArray.length - 1] != ')')
+            return longestValidParenthesesVariant1(s.substring(0, s.length() - 1));
+        if (s.length() % 2 == 0) {
+            if (isValid(s)) return s.length();
+        }
+        int left = longestValidParenthesesVariant1(s.substring(0, s.length() - 1));
+        if (left == s.length() - 1) return left;
+        int right = longestValidParenthesesVariant1(s.substring(1, s.length()));
+        if (left > right) {
+            return left;
+        } else {
+            return right;
+        }
+
+
+    }
+
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (Character c : s.toCharArray()) {
+            if (c == '(') {
+                stack.push(c);
+            } else {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+
+
+                stack.pop();
+            }
+        }
+
+        return (stack.isEmpty());
+    }
+
+    int longestValidParenthesesThird(String s) {
+        if (s.isEmpty()) return 0;
+        if (s.length() == 1) return 0;
+        if (s.equals("()")) return 2;
+        if (s.length() == 2) return 0;
+        int maxSize = (s.length() % 2 == 0) ? s.length() : s.length() - 1;
+
+        for (int i = maxSize; i > 2; i = i - 2) {
+            int n = getIsValidVariant(s, i);
+            if (n > 0) return n;
+
+        }
+        if (s.contains("()")) return 2;
+
+
+        return 0;
+
+    }
+
+    public int getIsValidVariant(String s, int n) {
+        int len = s.length() - n + 1;
+        for (int i = 0; i < len; i++) {
+            String current = s.substring(i, i + n);
+            if (isValid(current)) return n;
+
+
+        }
+        return 0;
+    }
+
+    public int[] moveStringToBytecode(String s) {
+        int[] result = new int[s.length()];
+
+        Stack<Integer> stack = new Stack<>();
+        char[] charArray = s.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            char c = charArray[i];
+            result[i] = 0;
+            if (c == '(') {
+                stack.push(i);
+            } else {
+                if (!stack.isEmpty()) {
+                    Integer indexLeftPair = stack.pop();
+                    result[indexLeftPair] = 1;
+                    result[i] = 1;
+                }
+
+
+            }
+        }
+
+        return result;
+    }
+
+    int longestValidParentheses(String s) {
+        int[] stringToBytecode = moveStringToBytecode(s);
+        int result = 0;
+        int previousMaxCounter = 0;
+        for (int i = 0; i < stringToBytecode.length; i++) {
+            if (stringToBytecode[i] == 1) {
+                previousMaxCounter = previousMaxCounter + 1;
+                if (previousMaxCounter > result) result = previousMaxCounter;
+            } else previousMaxCounter = 0;
+
+        }
+        return result;
     }
 }

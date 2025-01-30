@@ -21,7 +21,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
-@Service
 @Slf4j
 public class Solution {
     //242. Valid Anagram
