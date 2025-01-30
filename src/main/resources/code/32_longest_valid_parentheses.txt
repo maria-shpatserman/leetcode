@@ -1,0 +1,40 @@
+class Solution {
+
+ public int[] moveStringToBytecode(String s) {
+        int[] result = new int[s.length()];
+
+        Stack<Integer> stack = new Stack<>();
+        char[] charArray = s.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            char c = charArray[i];
+            result[i] = 0;
+            if (c == '(') {
+                stack.push(i);
+            } else {
+                if (!stack.isEmpty()) {
+                    Integer indexLeftPair = stack.pop();
+                    result[indexLeftPair] = 1;
+                    result[i] = 1;
+                }
+
+
+            }
+        }
+
+        return result;
+    }
+
+    int longestValidParentheses(String s) {
+        int[] stringToBytecode = moveStringToBytecode(s);
+        int result = 0;
+        int previousMaxCounter = 0;
+        for (int i = 0; i < stringToBytecode.length; i++) {
+            if (stringToBytecode[i] == 1) {
+                previousMaxCounter = previousMaxCounter + 1;
+                if (previousMaxCounter > result) result = previousMaxCounter;
+            } else previousMaxCounter = 0;
+
+        }
+        return result;
+    }
+}
