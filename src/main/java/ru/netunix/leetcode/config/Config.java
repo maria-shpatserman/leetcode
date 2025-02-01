@@ -83,6 +83,8 @@ public class Config {
 
     @Value(value = "classpath:code/32_longest_valid_parentheses.txt")
     private Resource longestValidParentheses;
+    @Value(value = "classpath:code/31_next_permutation.txt")
+    private Resource nextPermutation;
 
 
 }
