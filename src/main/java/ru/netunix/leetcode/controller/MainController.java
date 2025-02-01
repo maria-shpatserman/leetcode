@@ -376,5 +376,16 @@ public class MainController {
         return "task";
     }
 
+    @GetMapping("/getNextPermutation")
+    public String getNextPermutation(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getNextPermutation().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 31. Next Permutation";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+
 
 }

@@ -1,0 +1,59 @@
+class Solution {
+  public void nextPermutation(int[] nums) {
+        int permutationIndex = getPermutationIndex(nums);
+        if (permutationIndex == -1) {
+            //reorder full  array and return it
+            int i = 0;
+            int j = nums.length - 1;
+            while (i < j) {
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+                i = i + 1;
+                j = j - 1;
+            }
+        } else {
+            //switch values
+            int rightIndex = getIndexToChangeWith(nums, permutationIndex);
+            int temp = nums[permutationIndex];
+            nums[permutationIndex] = nums[rightIndex];
+            nums[rightIndex] = temp;
+            //reorder
+            int i = permutationIndex+1;
+            int j = nums.length - 1;
+            while (i < j) {
+                int temp2 = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp2;
+                i = i + 1;
+                j = j - 1;
+            }
+
+
+        }
+
+
+        System.out.println(Arrays.toString(nums));
+
+
+    }
+
+    public int getIndexToChangeWith(int[] nums, int indexLeft) {
+        if ((indexLeft + 1) == (nums.length - 1)) return nums.length - 1;
+        int changedValue = nums[indexLeft];
+        for (int i = nums.length - 1; i > indexLeft; i--) {
+            if (nums[i] > changedValue) return i;
+        }
+        return indexLeft;
+    }
+
+    public int getPermutationIndex(int[] nums) {
+        for (int i = nums.length - 1; i > 0; i--) {
+            if (nums[i - 1] < nums[i]) {
+                return i-1;
+            }
+
+        }
+        return -1;
+    }
+}
