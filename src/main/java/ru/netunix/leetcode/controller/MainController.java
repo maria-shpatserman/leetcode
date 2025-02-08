@@ -386,6 +386,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/getSearchInRotatedSortedArray")
+    public String getSearchInRotatedSortedArray(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getSearchInRotatedArray().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 33. Search in Rotated Sorted Array";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 
 }

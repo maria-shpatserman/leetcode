@@ -86,5 +86,8 @@ public class Config {
     @Value(value = "classpath:code/31_next_permutation.txt")
     private Resource nextPermutation;
 
+    @Value(value = "classpath:code/33_search_in_rotated_sorted_array.txt")
+    private Resource searchInRotatedArray;
+
 
 }
