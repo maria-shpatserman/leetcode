@@ -1,0 +1,51 @@
+class Solution {
+    public int search(int[] nums, int target) {
+        if (isRotated(nums)) {
+            if(target == nums[0]) return 0;
+            if(target == nums[nums.length-1]) return nums.length-1;
+            if(target>nums[0]){
+                return getIndexAscending(nums,target);
+            }
+            else {
+                return getIndexDescending(nums,target);
+            }
+
+        }
+        else if (isPossibleContain(nums,target)){
+            for(int i=0;i<nums.length;i++){
+                if(nums[i]==target) return i;
+            }
+        }
+        return -1;
+    }
+    public int getIndexAscending(int[]nums, int target){
+        int i=0;
+        while (nums[i]<nums[i+1]&&nums[i]<target){
+            i=i+1;
+        }
+        if(target == nums[i]) return i;
+        return -1;
+
+
+    }
+    public int getIndexDescending(int[]nums, int target){
+        int i=nums.length-1;
+        while (nums[i]>nums[i-1]&&nums[i]>target){
+            i=i-1;
+        }
+        if(target == nums[i]) return i;
+        return -1;
+
+    }
+
+    public boolean isRotated(int[] nums) {
+        if (nums[0] > nums[nums.length - 1]) return true;
+        return false;
+    }
+
+    public boolean isPossibleContain(int[] nums, int target) {
+        if (target < nums[0] || target > nums[nums.length - 1]) return false;
+        return true;
+
+    }
+}

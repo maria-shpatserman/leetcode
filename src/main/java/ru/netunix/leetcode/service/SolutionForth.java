@@ -5,8 +5,62 @@ import java.util.Arrays;
 public class SolutionForth {
     public static void main(String[] args) {
         SolutionForth s = new SolutionForth();
-        int[] nums = new int[]{1};
-        s.nextPermutation(nums);
+        int[] nums1 = new int[]{1};
+//        s.nextPermutation(nums1);
+        int[] nums = new int[]{4, 5, 6, 7, 0, 1, 2};
+        int target = 0;
+        int index = s.search(nums, target);
+        System.out.println("index = "+index);
+    }
+
+    public int search(int[] nums, int target) {
+        if (isRotated(nums)) {
+            if(target == nums[0]) return 0;
+            if(target == nums[nums.length-1]) return nums.length-1;
+            if(target>nums[0]){
+                return getIndexAscending(nums,target);
+            }
+            else {
+                return getIndexDescending(nums,target);
+            }
+
+        }
+        else if (isPossibleContain(nums,target)){
+            for(int i=0;i<nums.length;i++){
+                if(nums[i]==target) return i;
+            }
+        }
+        return -1;
+    }
+    public int getIndexAscending(int[]nums, int target){
+        int i=0;
+        while (nums[i]<nums[i+1]&&nums[i]<target){
+            i=i+1;
+        }
+        if(target == nums[i]) return i;
+        return -1;
+
+
+    }
+    public int getIndexDescending(int[]nums, int target){
+        int i=nums.length-1;
+        while (nums[i]>nums[i-1]&&nums[i]>target){
+            i=i-1;
+        }
+        if(target == nums[i]) return i;
+        return -1;
+
+    }
+
+    public boolean isRotated(int[] nums) {
+        if (nums[0] > nums[nums.length - 1]) return true;
+        return false;
+    }
+
+    public boolean isPossibleContain(int[] nums, int target) {
+        if (target < nums[0] || target > nums[nums.length - 1]) return false;
+        return true;
+
     }
 
     public void nextPermutation(int[] nums) {
@@ -29,7 +83,7 @@ public class SolutionForth {
             nums[permutationIndex] = nums[rightIndex];
             nums[rightIndex] = temp;
             //reorder
-            int i = permutationIndex+1;
+            int i = permutationIndex + 1;
             int j = nums.length - 1;
             while (i < j) {
                 int temp2 = nums[i];
@@ -60,7 +114,7 @@ public class SolutionForth {
     public int getPermutationIndex(int[] nums) {
         for (int i = nums.length - 1; i > 0; i--) {
             if (nums[i - 1] < nums[i]) {
-                return i-1;
+                return i - 1;
             }
 
         }
