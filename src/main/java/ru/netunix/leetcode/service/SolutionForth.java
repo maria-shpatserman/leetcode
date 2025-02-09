@@ -11,6 +11,9 @@ public class SolutionForth {
         int target = 0;
         int index = s.search(nums, target);
         System.out.println("index = "+index);
+
+        String result = s.countAndSay(4);
+        System.out.println("---->>>  CountAndSay = >>>"+result);
     }
 
     public int search(int[] nums, int target) {
@@ -62,7 +65,32 @@ public class SolutionForth {
         return true;
 
     }
+    public String countAndSay(int n) {
 
+        if (n==1) return "1";
+        String previous = countAndSay(n-1);
+        int count=1;
+        char[] chars = previous.toCharArray();
+        char previousChar = chars[0];
+        StringBuilder result= new StringBuilder();
+        for(int i=1;i<chars.length;i++){
+            char current = chars[i];
+            if(current==previousChar){
+                count=count+1;
+            }
+            else {
+                result.append(count).append(previousChar);
+                count=1;
+                previousChar=current;
+            }
+
+
+
+        }
+        result.append(count).append(previousChar);
+        return result.toString();
+
+    }
     public void nextPermutation(int[] nums) {
         int permutationIndex = getPermutationIndex(nums);
         if (permutationIndex == -1) {

@@ -1,0 +1,28 @@
+class Solution {
+ public String countAndSay(int n) {
+
+        if (n==1) return "1";
+        String previous = countAndSay(n-1);
+        int count=1;
+        char[] chars = previous.toCharArray();
+        char previousChar = chars[0];
+        StringBuilder result= new StringBuilder();
+        for(int i=1;i<chars.length;i++){
+            char current = chars[i];
+            if(current==previousChar){
+                count=count+1;
+            }
+            else {
+                result.append(count).append(previousChar);
+                count=1;
+                previousChar=current;
+            }
+
+
+
+        }
+        result.append(count).append(previousChar);
+        return result.toString();
+
+    }
+}
