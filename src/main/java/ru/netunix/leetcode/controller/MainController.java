@@ -397,5 +397,27 @@ public class MainController {
         return "task";
     }
 
+    @GetMapping("/getCountAndSay")
+    public String getCountAndSay(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getCountAndSay().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 38. Count And Say";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+
+    @GetMapping("/addDigits")
+    public String getAddDigits(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getAddDigits().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 258. add digits";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+
 
 }

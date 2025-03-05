@@ -89,5 +89,11 @@ public class Config {
     @Value(value = "classpath:code/33_search_in_rotated_sorted_array.txt")
     private Resource searchInRotatedArray;
 
+    //38_count_and_say.txt
+    @Value(value = "classpath:code/38_count_and_say.txt")
+    private Resource countAndSay;
+
+    @Value(value = "classpath:code/258_Add_digits.txt")
+    private Resource addDigits;
 
 }

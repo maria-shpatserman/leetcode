@@ -10,44 +10,52 @@ public class SolutionForth {
         int[] nums = new int[]{4, 5, 6, 7, 0, 1, 2};
         int target = 0;
         int index = s.search(nums, target);
-        System.out.println("index = "+index);
+        System.out.println("index = " + index);
+
+        String result = s.countAndSay(4);
+        System.out.println("---->>>  CountAndSay = >>>" + result);
+
+        String a = "01110111111111101000000101111001110001111100001101";
+        String b = "000011011011001011101111001100000011011110011";
+        String resultAddBinary = s.addBinary(a, b);
+        System.out.println("---->>>> Add Binary --->>>" + resultAddBinary);
     }
 
     public int search(int[] nums, int target) {
         if (isRotated(nums)) {
-            if(target == nums[0]) return 0;
-            if(target == nums[nums.length-1]) return nums.length-1;
-            if(target>nums[0]){
-                return getIndexAscending(nums,target);
-            }
-            else {
-                return getIndexDescending(nums,target);
+            if (target == nums[0]) return 0;
+            if (target == nums[nums.length - 1]) return nums.length - 1;
+            if (target > nums[0]) {
+                return getIndexAscending(nums, target);
+            } else {
+                return getIndexDescending(nums, target);
             }
 
-        }
-        else if (isPossibleContain(nums,target)){
-            for(int i=0;i<nums.length;i++){
-                if(nums[i]==target) return i;
+        } else if (isPossibleContain(nums, target)) {
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] == target) return i;
             }
         }
         return -1;
     }
-    public int getIndexAscending(int[]nums, int target){
-        int i=0;
-        while (nums[i]<nums[i+1]&&nums[i]<target){
-            i=i+1;
+
+    public int getIndexAscending(int[] nums, int target) {
+        int i = 0;
+        while (nums[i] < nums[i + 1] && nums[i] < target) {
+            i = i + 1;
         }
-        if(target == nums[i]) return i;
+        if (target == nums[i]) return i;
         return -1;
 
 
     }
-    public int getIndexDescending(int[]nums, int target){
-        int i=nums.length-1;
-        while (nums[i]>nums[i-1]&&nums[i]>target){
-            i=i-1;
+
+    public int getIndexDescending(int[] nums, int target) {
+        int i = nums.length - 1;
+        while (nums[i] > nums[i - 1] && nums[i] > target) {
+            i = i - 1;
         }
-        if(target == nums[i]) return i;
+        if (target == nums[i]) return i;
         return -1;
 
     }
@@ -60,6 +68,31 @@ public class SolutionForth {
     public boolean isPossibleContain(int[] nums, int target) {
         if (target < nums[0] || target > nums[nums.length - 1]) return false;
         return true;
+
+    }
+
+    public String countAndSay(int n) {
+
+        if (n == 1) return "1";
+        String previous = countAndSay(n - 1);
+        int count = 1;
+        char[] chars = previous.toCharArray();
+        char previousChar = chars[0];
+        StringBuilder result = new StringBuilder();
+        for (int i = 1; i < chars.length; i++) {
+            char current = chars[i];
+            if (current == previousChar) {
+                count = count + 1;
+            } else {
+                result.append(count).append(previousChar);
+                count = 1;
+                previousChar = current;
+            }
+
+
+        }
+        result.append(count).append(previousChar);
+        return result.toString();
 
     }
 
@@ -119,5 +152,34 @@ public class SolutionForth {
 
         }
         return -1;
+    }
+
+    public String addBinary(String a, String b) {
+        long aInt = Long.parseLong(a, 2);
+        long bInt = Long.parseLong(b, 2);
+        long result = aInt + bInt;
+        return Long.toBinaryString(result);
+    }
+
+    public int addDigits(int num) {
+      int result = getSumOfChars(num);
+
+
+        while (result>9){
+            result = getSumOfChars(result);
+        }
+
+        return result;
+
+    }
+    public int getSumOfChars(int num ){
+        String s= String.valueOf(num);
+        int tmp=0;
+
+        for(char c: s.toCharArray()){
+
+            tmp = tmp+ Character.getNumericValue(c);
+        }
+       return tmp;
     }
 }
