@@ -408,5 +408,16 @@ public class MainController {
         return "task";
     }
 
+    @GetMapping("/addDigits")
+    public String getAddDigits(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getAddDigits().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 258. add digits";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+
 
 }
