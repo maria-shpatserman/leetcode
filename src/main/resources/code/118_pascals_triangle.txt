@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+         List<List<Integer>> result = new ArrayList<>();
+        List<Integer> valuesOne = new ArrayList<>();
+        valuesOne.add(1);
+        result.add(valuesOne);
+
+        for (int i = 1; i < numRows; i++) {
+            List<Integer> values = new ArrayList<>();
+            int columnCount = i+1;
+            for (int j = 0; j < columnCount; j++) {
+                if (j == 0) values.add(1);
+                if (j == (columnCount - 1)) values.add(1);
+                if (j != 0 && j < (columnCount - 1)) {
+                    Integer sum = result.get(i-1).get(j-1)+ result.get(i-1).get(j);
+                    values.add(sum);
+                }
+            }
+            result.add(values);
+        }
+        return result;
+    }
+}

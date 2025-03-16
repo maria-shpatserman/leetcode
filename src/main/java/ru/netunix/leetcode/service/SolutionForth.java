@@ -1,6 +1,8 @@
 package ru.netunix.leetcode.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SolutionForth {
     public static void main(String[] args) {
@@ -19,6 +21,10 @@ public class SolutionForth {
         String b = "000011011011001011101111001100000011011110011";
         String resultAddBinary = s.addBinary(a, b);
         System.out.println("---->>>> Add Binary --->>>" + resultAddBinary);
+
+        List<List<Integer>> generateList = s.generate(25);
+        System.out.println(" generated list = " + generateList.toString());
+
     }
 
     public int search(int[] nums, int target) {
@@ -162,24 +168,48 @@ public class SolutionForth {
     }
 
     public int addDigits(int num) {
-      int result = getSumOfChars(num);
+        int result = getSumOfChars(num);
 
 
-        while (result>9){
+        while (result > 9) {
             result = getSumOfChars(result);
         }
 
         return result;
 
     }
-    public int getSumOfChars(int num ){
-        String s= String.valueOf(num);
-        int tmp=0;
 
-        for(char c: s.toCharArray()){
+    public int getSumOfChars(int num) {
+        String s = String.valueOf(num);
+        int tmp = 0;
 
-            tmp = tmp+ Character.getNumericValue(c);
+        for (char c : s.toCharArray()) {
+
+            tmp = tmp + Character.getNumericValue(c);
         }
-       return tmp;
+        return tmp;
+    }
+
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> valuesOne = new ArrayList<>();
+        valuesOne.add(1);
+        result.add(valuesOne);
+
+        for (int i = 1; i < numRows; i++) {
+            List<Integer> values = new ArrayList<>();
+            int columnCount = i+1;
+            for (int j = 0; j < columnCount; j++) {
+                if (j == 0) values.add(1);
+                if (j == (columnCount - 1)) values.add(1);
+                if (j != 0 && j < (columnCount - 1)) {
+                    Integer sum = result.get(i-1).get(j-1)+ result.get(i-1).get(j);
+                    values.add(sum);
+                }
+            }
+            result.add(values);
+        }
+        return result;
+
     }
 }

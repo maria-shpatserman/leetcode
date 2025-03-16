@@ -95,5 +95,6 @@ public class Config {
 
     @Value(value = "classpath:code/258_Add_digits.txt")
     private Resource addDigits;
-
+    @Value(value = "classpath:code/118_pascals_triangle.txt")
+    private Resource pascalTriangle;
 }
