@@ -17,11 +17,11 @@ import java.nio.charset.Charset;
 @Slf4j
 public class MainController {
     private Config configuration;
+
     @Autowired
-    MainController(Config configuration){
+    MainController(Config configuration) {
         this.configuration = configuration;
     }
-
 
 
     @GetMapping("/")
@@ -132,6 +132,7 @@ public class MainController {
 
         return "task";
     }
+
     //getMedianTwoSortedArrays
     @GetMapping("/getMedianTwoSortedArrays")
     public String getMedianTwoSortedArrays(Model model) throws IOException {
@@ -143,6 +144,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getLongestPalindromicSubstring")
     public String getLongestPalindromicSubstring(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getLongestPalindromicSubstring().getInputStream(), Charset.defaultCharset());
@@ -153,6 +155,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getAreaWithMostWater")
     public String getAreaWithMostWater(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getMostWaterContainer().getInputStream(), Charset.defaultCharset());
@@ -163,6 +166,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getZigZagConversion")
     public String getZigZagConversion(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getZigzagConversion().getInputStream(), Charset.defaultCharset());
@@ -173,6 +177,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getReverseInteger")
     public String getReverseInteger(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getReverseInteger().getInputStream(), Charset.defaultCharset());
@@ -183,6 +188,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getStringToIntegerAtoi")
     public String getStringToIntegerAtoi(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getStringToIntegerAtoi().getInputStream(), Charset.defaultCharset());
@@ -193,6 +199,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getLetterCombinations")
     public String getLetterCombinations(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getLetterCombinations().getInputStream(), Charset.defaultCharset());
@@ -203,6 +210,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/get3Sum")
     public String get3Sum(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getThreeSum().getInputStream(), Charset.defaultCharset());
@@ -213,6 +221,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/get4Sum")
     public String get4Sum(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getFourSum().getInputStream(), Charset.defaultCharset());
@@ -223,6 +232,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/get3SumClosest")
     public String get3SumClosest(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getThreeSumClosest().getInputStream(), Charset.defaultCharset());
@@ -233,6 +243,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getRemoveNthElement")
     public String getRemoveNthElement(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getRemoveNthElement().getInputStream(), Charset.defaultCharset());
@@ -243,6 +254,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/generateParentheses")
     public String generateParentheses(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getGenerateParentheses().getInputStream(), Charset.defaultCharset());
@@ -253,6 +265,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getMergedKSortedLists")
     public String getMergedKSortedLists(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getMergeKSortedLists().getInputStream(), Charset.defaultCharset());
@@ -263,6 +276,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getSwappedNodesInPairs")
     public String getSwappedNodesInPairs(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getSwappedNodesInPairs().getInputStream(), Charset.defaultCharset());
@@ -273,6 +287,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getReversedNodesInGroups")
     public String getReversedNodeListInGroups(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getReversedNodesInGroups().getInputStream(), Charset.defaultCharset());
@@ -283,6 +298,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getConcatenationAllWords")
     public String getConcatenationAllWords(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getConcatenationAllWords().getInputStream(), Charset.defaultCharset());
@@ -293,6 +309,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getIsValidSudoku")
     public String getIsValidSudoku(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getIsValidSudoku().getInputStream(), Charset.defaultCharset());
@@ -303,6 +320,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getSudokuSolver")
     public String getSudokuSolver(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getSudokuSolver().getInputStream(), Charset.defaultCharset());
@@ -324,6 +342,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getInsertPosition")
     public String getInsertPosition(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getSearchInsertPosition().getInputStream(), Charset.defaultCharset());
@@ -334,6 +353,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getDivideTwoIntegers")
     public String getDivideTwoIntegers(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getDivideTwoIntegers().getInputStream(), Charset.defaultCharset());
@@ -344,6 +364,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getMultiplyStrings")
     public String getMultiplyStrings(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getMultiplyStrings().getInputStream(), Charset.defaultCharset());
@@ -365,6 +386,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getLongestValidParentheses")
     public String getLongestValidParentheses(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getLongestValidParentheses().getInputStream(), Charset.defaultCharset());
@@ -386,6 +408,7 @@ public class MainController {
 
         return "task";
     }
+
     @GetMapping("/getSearchInRotatedSortedArray")
     public String getSearchInRotatedSortedArray(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getSearchInRotatedArray().getInputStream(), Charset.defaultCharset());
@@ -419,5 +442,16 @@ public class MainController {
         return "task";
     }
 
+    //pascalTriangle
+    @GetMapping("/pascalTriangle")
+    public String getPascalTriangle(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getPascalTriangle().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 118. Pascal's Triangle";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }
