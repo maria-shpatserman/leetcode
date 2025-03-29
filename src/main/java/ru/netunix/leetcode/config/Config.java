@@ -89,7 +89,6 @@ public class Config {
     @Value(value = "classpath:code/33_search_in_rotated_sorted_array.txt")
     private Resource searchInRotatedArray;
 
-    //38_count_and_say.txt
     @Value(value = "classpath:code/38_count_and_say.txt")
     private Resource countAndSay;
 
@@ -97,4 +96,7 @@ public class Config {
     private Resource addDigits;
     @Value(value = "classpath:code/118_pascals_triangle.txt")
     private Resource pascalTriangle;
+    @Value(value = "classpath:code/119_pascals_triangle_2.txt")
+    private Resource pascalTriangleTwo;
+
 }

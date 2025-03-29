@@ -24,6 +24,8 @@ public class SolutionForth {
 
         List<List<Integer>> generateList = s.generate(25);
         System.out.println(" generated list = " + generateList.toString());
+        List<Integer> row = s.getRow(3);
+        System.out.println(" generated pascals row  = " + row.toString());
 
     }
 
@@ -212,4 +214,27 @@ public class SolutionForth {
         return result;
 
     }
+
+    public List<Integer> getRow(int rowIndex) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> valuesOne = new ArrayList<>();
+        valuesOne.add(1);
+        result.add(valuesOne);
+
+        for (int i = 1; i < rowIndex+1; i++) {
+            List<Integer> values = new ArrayList<>();
+            int columnCount = i+1;
+            for (int j = 0; j < columnCount; j++) {
+                if (j == 0) values.add(1);
+                if (j == (columnCount - 1)) values.add(1);
+                if (j != 0 && j < (columnCount - 1)) {
+                    Integer sum = result.get(i-1).get(j-1)+ result.get(i-1).get(j);
+                    values.add(sum);
+                }
+            }
+            result.add(values);
+        }
+        return result.get(rowIndex);
+    }
+
 }
