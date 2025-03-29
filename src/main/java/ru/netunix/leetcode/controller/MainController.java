@@ -453,5 +453,15 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/pascalTriangleTwo")
+    public String getPascalTriangleTwo(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getPascalTriangleTwo().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 119. Pascal's Triangle II";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }
