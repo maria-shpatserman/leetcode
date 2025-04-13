@@ -442,7 +442,6 @@ public class MainController {
         return "task";
     }
 
-    //pascalTriangle
     @GetMapping("/pascalTriangle")
     public String getPascalTriangle(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getPascalTriangle().getInputStream(), Charset.defaultCharset());
@@ -459,6 +458,16 @@ public class MainController {
         model.addAttribute("code", code);
         //taskName
         String taskName = "Task 119. Pascal's Triangle II";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+    @GetMapping("/singleNumber")
+    public String getSingleNumber(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getSingleNumber().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 136. Single Number";
         model.addAttribute("taskName", taskName);
 
         return "task";

@@ -2,7 +2,9 @@ package ru.netunix.leetcode.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SolutionForth {
     public static void main(String[] args) {
@@ -26,6 +28,10 @@ public class SolutionForth {
         System.out.println(" generated list = " + generateList.toString());
         List<Integer> row = s.getRow(3);
         System.out.println(" generated pascals row  = " + row.toString());
+        int[] nums3 = new int[] {1};
+        int i = s.singleNumber(nums3);
+        System.out.println(" single number = "+ i);
+
 
     }
 
@@ -235,6 +241,18 @@ public class SolutionForth {
             result.add(values);
         }
         return result.get(rowIndex);
+    }
+    public int singleNumber(int[] nums) {
+        Set<Integer> unique = new HashSet<Integer>();
+
+        for (int i =0; i<nums.length;i++){
+            if (unique.contains(nums[i])){
+                unique.remove(nums[i]);
+            }
+            else unique.add(nums[i]);
+        }
+        return (int)unique.stream().findFirst().get();
+
     }
 
 }
