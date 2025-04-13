@@ -442,7 +442,6 @@ public class MainController {
         return "task";
     }
 
-    //pascalTriangle
     @GetMapping("/pascalTriangle")
     public String getPascalTriangle(Model model) throws IOException {
         String code = StreamUtils.copyToString(configuration.getPascalTriangle().getInputStream(), Charset.defaultCharset());
