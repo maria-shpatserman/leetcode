@@ -99,4 +99,7 @@ public class Config {
     @Value(value = "classpath:code/119_pascals_triangle_2.txt")
     private Resource pascalTriangleTwo;
 
+    @Value(value = "classpath:code/136_single_number.txt")
+    private Resource singleNumber;
+
 }
