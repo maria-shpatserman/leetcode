@@ -473,4 +473,15 @@ public class MainController {
         return "task";
     }
 
+    @GetMapping("/linkedListCycle")
+    public String getLinkedListCycle(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getLinkedListCycle().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 141. Linked List Cycle";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+
 }
