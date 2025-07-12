@@ -102,6 +102,7 @@ public class Config {
     @Value(value = "classpath:code/136_single_number.txt")
     private Resource singleNumber;
 
+
     @Value(value = "classpath:code/141_linked_list_cycle.txt")
     private Resource linkedListCycle;
 
