@@ -1,0 +1,63 @@
+class Solution {
+    class Point {
+        int x;
+        int y;
+
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+
+        @Override
+        public boolean equals(Object obj) {
+            Point that = (Point) obj;
+            if ((this.x == that.x) && (this.y == that.y)) return true;
+            return false;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, y);
+        }
+    }
+
+    public boolean isPathCrossing(String path) {
+        Map<Point, Integer> points = new HashMap<>();
+        Point lastPoint = new Point(0, 0);
+        points.put(lastPoint, 1);
+
+        for (String s : path.split("")) {
+            Path step = Path.valueOf(s);
+            lastPoint = getPoint(lastPoint, step);
+            if(points.containsKey(lastPoint)){
+               points.put(lastPoint, points.get(lastPoint)+1);
+            }
+           else{ points.put(lastPoint,  1);}
+
+        }
+        if (!points.entrySet().stream().filter(a -> a.getValue() > 1).collect(Collectors.toList()).isEmpty())
+            return true;
+        return false;
+    }
+
+    Point getPoint(Point lastPoint, Path p) {
+        int x = lastPoint.x;
+        int y = lastPoint.y;
+        return switch (p) {
+            case N -> new Point(x, y + 1);
+            case E -> new Point(x + 1, y);
+            case S -> new Point(x, y - 1);
+            case W -> new Point(x - 1, y);
+
+        };
+
+    }
+
+    enum Path {
+        N,
+        W,
+        E,
+        S;
+    }
+}
