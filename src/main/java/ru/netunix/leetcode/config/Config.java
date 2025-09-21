@@ -39,6 +39,8 @@ public class Config {
     private Resource linkedListCycle;
     @Value(value = "classpath:code/67_add_binary.txt")
     private Resource addBinary;
+    @Value(value = "classpath:code/1496_path_crossing.txt")
+    private Resource pathCrossing;
 
 
 

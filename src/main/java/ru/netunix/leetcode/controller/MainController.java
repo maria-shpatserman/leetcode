@@ -174,6 +174,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/pathCrossing")
+    public String getPathCrossing(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getPathCrossing().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 1496. Path Crossing";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 
 
