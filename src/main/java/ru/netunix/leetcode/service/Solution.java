@@ -45,22 +45,61 @@ public class Solution {
         TreeNode node3 = new TreeNode(3, node6, null);
         TreeNode nodeRoot = new TreeNode(1, node2, node3);
         int result = solution.countNodes(nodeRoot);
-        System.out.println("result = "+result);
+        System.out.println("result = " + result);
+        int[] nums = {};
+        List<String> summaryRanges = solution.summaryRanges(nums);
+        System.out.println(summaryRanges);
 
 
     }
-    int isLast(TreeNode node){
-        if (node == null ) return 0;
-        if(node.left==null && node.right==null) {
+
+    int isLast(TreeNode node) {
+        if (node == null) return 0;
+        if (node.left == null && node.right == null) {
             return 1;
-        }
-        else
-            return isLast(node.left)+isLast(node.right)+1;
+        } else
+            return isLast(node.left) + isLast(node.right) + 1;
     }
 
     public int countNodes(TreeNode root) {
 
         return isLast(root);
+    }
+
+    public List<String> summaryRanges(int[] nums) {
+        List<String> result = new ArrayList<>();
+        int indexLeft = 0;
+        while(indexLeft<nums.length) {
+            int lastIndex = getLastIndex(indexLeft, nums);
+            String makeRange = makeRange(nums[indexLeft], nums[lastIndex]);
+            result.add(makeRange);
+            indexLeft = lastIndex + 1;
+        }
+
+
+
+        return result;
+    }
+
+    int getLastIndex(int startIndex, int[] nums) {
+
+        if ((startIndex + 1) == nums.length) return startIndex;
+        int start = nums[startIndex];
+        int nextIndex = startIndex;
+        for (int i = startIndex + 1; i < nums.length; i++) {
+            int temp = nums[i];
+            if ((start + 1) == temp) {
+                start = temp;
+                nextIndex = i;
+            } else
+                break;
+        }
+        return nextIndex;
+    }
+
+    String makeRange(int left, int right) {
+        if (left == right) return String.valueOf(left);
+        return left + "->" + right;
     }
 
 

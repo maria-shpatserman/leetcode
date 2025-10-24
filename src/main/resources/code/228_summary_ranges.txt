@@ -1,0 +1,37 @@
+class Solution {
+     public List<String> summaryRanges(int[] nums) {
+        List<String> result = new ArrayList<>();
+        int indexLeft = 0;
+        while(indexLeft<nums.length) {
+            int lastIndex = getLastIndex(indexLeft, nums);
+            String makeRange = makeRange(nums[indexLeft], nums[lastIndex]);
+            result.add(makeRange);
+            indexLeft = lastIndex + 1;
+        }
+
+
+
+        return result;
+    }
+
+    int getLastIndex(int startIndex, int[] nums) {
+
+        if ((startIndex + 1) == nums.length) return startIndex;
+        int start = nums[startIndex];
+        int nextIndex = startIndex;
+        for (int i = startIndex + 1; i < nums.length; i++) {
+            int temp = nums[i];
+            if ((start + 1) == temp) {
+                start = temp;
+                nextIndex = i;
+            } else
+                break;
+        }
+        return nextIndex;
+    }
+
+    String makeRange(int left, int right) {
+        if (left == right) return String.valueOf(left);
+        return left + "->" + right;
+    }
+}
