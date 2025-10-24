@@ -184,6 +184,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/countBinaryTreeNodes")
+    public String getCountBinaryTreeNodes(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getCountBinaryTreeNodes().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 222. Count Complete Tree Nodes";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 
 
