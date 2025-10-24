@@ -10,7 +10,7 @@ import org.springframework.core.io.Resource;
 public class MediumConfig {
     @Value(value = "classpath:code/2_add_two_numbers.txt")
     private Resource addTwoNumbers;
-    @Value(value = "classpath:code/2_longest_substring_without_repeating_characters.txt")
+    @Value(value = "classpath:code/3_longest_substring_without_repeating_characters.txt")
     private Resource longestSubstring;
     @Value(value = "classpath:code/5_longest_palindromic_substring.txt")
     private Resource longestPalindromicSubstring;

@@ -3,6 +3,7 @@ package ru.netunix.leetcode.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.netunix.leetcode.util.ListNode;
+import ru.netunix.leetcode.util.TreeNode;
 
 import javax.print.DocFlavor;
 import java.nio.file.Path;
@@ -37,6 +38,29 @@ public class Solution {
         boolean crossing = solution.isPathCrossing("NESWW");
         System.out.println("answer = " + crossing);
 
+        TreeNode node4 = new TreeNode(4);
+        TreeNode node5 = new TreeNode(5);
+        TreeNode node6 = new TreeNode(6);
+        TreeNode node2 = new TreeNode(2, node4, node5);
+        TreeNode node3 = new TreeNode(3, node6, null);
+        TreeNode nodeRoot = new TreeNode(1, node2, node3);
+        int result = solution.countNodes(nodeRoot);
+        System.out.println("result = "+result);
+
+
+    }
+    int isLast(TreeNode node){
+        if (node == null ) return 0;
+        if(node.left==null && node.right==null) {
+            return 1;
+        }
+        else
+            return isLast(node.left)+isLast(node.right)+1;
+    }
+
+    public int countNodes(TreeNode root) {
+
+        return isLast(root);
     }
 
 
@@ -122,6 +146,7 @@ public class Solution {
         }
     }
 
+
     public boolean isPathCrossing(String path) {
         Map<Point, Integer> points = new HashMap<>();
         Point lastPoint = new Point(0, 0);
@@ -130,10 +155,11 @@ public class Solution {
         for (String s : path.split("")) {
             Path step = Path.valueOf(s);
             lastPoint = getPoint(lastPoint, step);
-            if(points.containsKey(lastPoint)){
-               points.put(lastPoint, points.get(lastPoint)+1);
+            if (points.containsKey(lastPoint)) {
+                points.put(lastPoint, points.get(lastPoint) + 1);
+            } else {
+                points.put(lastPoint, 1);
             }
-           else{ points.put(lastPoint,  1);}
 
         }
         if (!points.entrySet().stream().filter(a -> a.getValue() > 1).collect(Collectors.toList()).isEmpty())

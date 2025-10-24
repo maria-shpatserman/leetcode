@@ -41,6 +41,8 @@ public class Config {
     private Resource addBinary;
     @Value(value = "classpath:code/1496_path_crossing.txt")
     private Resource pathCrossing;
+    @Value(value = "classpath:code/222_count_complete_tree_nodes.txt")
+    private Resource countBinaryTreeNodes;
 
 
 
