@@ -194,6 +194,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/summaryRanges")
+    public String getSummaryRanges(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getSummaryRanges().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 228. Summary Ranges";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 
 

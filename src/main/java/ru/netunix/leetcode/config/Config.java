@@ -43,7 +43,8 @@ public class Config {
     private Resource pathCrossing;
     @Value(value = "classpath:code/222_count_complete_tree_nodes.txt")
     private Resource countBinaryTreeNodes;
-
+    @Value(value = "classpath:code/228_summary_ranges.txt")
+    private Resource summaryRanges;
 
 
 
