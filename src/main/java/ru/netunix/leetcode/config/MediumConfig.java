@@ -64,4 +64,7 @@ public class MediumConfig {
 
     @Value(value = "classpath:code/38_count_and_say.txt")
     private Resource countAndSay;
+
+    @Value(value = "classpath:code/3217_delete_nodes_from_linked_list.txt")
+    private Resource deleteNodesFromList;
 }
