@@ -267,4 +267,14 @@ public class MediumController {
 
         return "task";
     }
+    @GetMapping("/getDeleteNodesFromList")
+    public String getDeleteNodesFromList(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getDeleteNodesFromList().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 3217. Delete Nodes From Linked List Present in Array";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 }
