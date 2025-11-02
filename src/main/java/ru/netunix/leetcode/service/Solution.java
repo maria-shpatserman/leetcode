@@ -46,11 +46,29 @@ public class Solution {
         TreeNode nodeRoot = new TreeNode(1, node2, node3);
         int result = solution.countNodes(nodeRoot);
         System.out.println("result = " + result);
-        int[] nums = {};
+        int[] nums = {7,1,5,4,6,2};
         List<String> summaryRanges = solution.summaryRanges(nums);
         System.out.println(summaryRanges);
+        int maxProfit = solution.maxProfit(nums);
+        System.out.println("naxProfit = "+maxProfit);
 
 
+    }
+
+    public int maxProfit(int[] prices) {
+        int min = prices[0];
+        int maxDiff = 0;
+        if(prices.length == 1) return maxDiff;
+        for(int i=1;i<prices.length;i++){
+            if(prices[i]<min){
+                min=prices[i];
+            }
+            else {
+                maxDiff= Math.max((prices[i] - min), maxDiff);
+            }
+        }
+
+        return maxDiff;
     }
 
     int isLast(TreeNode node) {
@@ -69,13 +87,12 @@ public class Solution {
     public List<String> summaryRanges(int[] nums) {
         List<String> result = new ArrayList<>();
         int indexLeft = 0;
-        while(indexLeft<nums.length) {
+        while (indexLeft < nums.length) {
             int lastIndex = getLastIndex(indexLeft, nums);
             String makeRange = makeRange(nums[indexLeft], nums[lastIndex]);
             result.add(makeRange);
             indexLeft = lastIndex + 1;
         }
-
 
 
         return result;
