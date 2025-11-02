@@ -46,6 +46,10 @@ public class Config {
     @Value(value = "classpath:code/228_summary_ranges.txt")
     private Resource summaryRanges;
 
+    @Value(value = "classpath:code/121_best_time_to_buy_sell.txt")
+    private Resource buyAndSell;
+
+
 
 
 

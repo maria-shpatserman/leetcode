@@ -204,6 +204,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/buyAndSell")
+    public String getBuyAndSell(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getBuyAndSell().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 121. Best Time to Buy and Sell Stock";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 
 
