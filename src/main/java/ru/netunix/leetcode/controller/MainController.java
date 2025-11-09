@@ -214,6 +214,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/pathSum")
+    public String getPathSum(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getPathSum().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 112. Path Sum";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 
 

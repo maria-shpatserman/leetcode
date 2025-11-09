@@ -49,6 +49,8 @@ public class Config {
     @Value(value = "classpath:code/121_best_time_to_buy_sell.txt")
     private Resource buyAndSell;
 
+    @Value(value = "classpath:code/112_path_sum.txt")
+    private Resource pathSum;
 
 
 
