@@ -1,6 +1,7 @@
 package ru.netunix.leetcode.service;
 
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.stereotype.Service;
 import ru.netunix.leetcode.util.ListNode;
 import ru.netunix.leetcode.util.TreeNode;
@@ -37,34 +38,50 @@ public class Solution {
 
         boolean crossing = solution.isPathCrossing("NESWW");
         System.out.println("answer = " + crossing);
+        TreeNode node7 = new TreeNode(7);
+        TreeNode node8 = new TreeNode(2);
+        TreeNode node9 = new TreeNode(1);
+        TreeNode node4 = new TreeNode(11,node7,node8);
+        TreeNode node5 = new TreeNode(13);
+        TreeNode node6 = new TreeNode(4,null,node9);
+        TreeNode node2 = new TreeNode(4, node4, null);
+        TreeNode node3 = new TreeNode(8, node5, node6);
+        TreeNode nodeRoot = new TreeNode(5, node2, node3);
+//        int result = solution.countNodes(nodeRoot);
+//        System.out.println("result = " + result);
+//        int[] nums = {7, 1, 5, 4, 6, 2};
+//        List<String> summaryRanges = solution.summaryRanges(nums);
+//        System.out.println(summaryRanges);
+//        int maxProfit = solution.maxProfit(nums);
+//        System.out.println("naxProfit = " + maxProfit);
+        boolean hasPathSum = solution.hasPathSum(nodeRoot, 18);
+        System.out.println("hasPathSum = " + hasPathSum);
 
-        TreeNode node4 = new TreeNode(4);
-        TreeNode node5 = new TreeNode(5);
-        TreeNode node6 = new TreeNode(6);
-        TreeNode node2 = new TreeNode(2, node4, node5);
-        TreeNode node3 = new TreeNode(3, node6, null);
-        TreeNode nodeRoot = new TreeNode(1, node2, node3);
-        int result = solution.countNodes(nodeRoot);
-        System.out.println("result = " + result);
-        int[] nums = {7,1,5,4,6,2};
-        List<String> summaryRanges = solution.summaryRanges(nums);
-        System.out.println(summaryRanges);
-        int maxProfit = solution.maxProfit(nums);
-        System.out.println("naxProfit = "+maxProfit);
+    }
 
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) return false;
+        return checkNode(0, targetSum, root);
+    }
+
+    public boolean checkNode(int parentSum, int targetSum, TreeNode current) {
+        int currentSum = current.val + parentSum;
+        if ((currentSum == targetSum) && (current.left==null && current.right==null))return true;
+        if (current.left != null && checkNode(currentSum, targetSum, current.left)) return true;
+        if (current.right != null && checkNode(currentSum, targetSum, current.right)) return true;
+        return false;
 
     }
 
     public int maxProfit(int[] prices) {
         int min = prices[0];
         int maxDiff = 0;
-        if(prices.length == 1) return maxDiff;
-        for(int i=1;i<prices.length;i++){
-            if(prices[i]<min){
-                min=prices[i];
-            }
-            else {
-                maxDiff= Math.max((prices[i] - min), maxDiff);
+        if (prices.length == 1) return maxDiff;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < min) {
+                min = prices[i];
+            } else {
+                maxDiff = Math.max((prices[i] - min), maxDiff);
             }
         }
 
