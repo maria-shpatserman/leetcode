@@ -277,4 +277,14 @@ public class MediumController {
 
         return "task";
     }
+    @GetMapping("/getMergeIntervals")
+    public String getMergeIntervals(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getMergeIntervals().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 56. Merge Intervals";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 }
