@@ -67,4 +67,7 @@ public class MediumConfig {
 
     @Value(value = "classpath:code/3217_delete_nodes_from_linked_list.txt")
     private Resource deleteNodesFromList;
+
+    @Value(value = "classpath:code/56_merge_intervals.txt")
+    private Resource mergeIntervals;
 }
