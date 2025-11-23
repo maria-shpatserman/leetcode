@@ -287,4 +287,14 @@ public class MediumController {
 
         return "task";
     }
+    @GetMapping("/getInsertIntervals")
+    public String getInsertIntervals(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getInsertIntervals().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 57. Insert Intervals";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 }
