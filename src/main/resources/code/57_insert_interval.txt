@@ -1,0 +1,100 @@
+class Solution {
+     public int[][] insert(int[][] intervals, int[] newInterval) {
+        int[][] copied = Arrays.copyOf(intervals, intervals.length + 1);
+        copied[intervals.length] = newInterval;
+        return merge(copied);
+    }
+     public Map<Integer, List<int[]>> getMapIntervals(int[][] intervals) {
+        Map<Integer, List<int[]>> result = new HashMap<>();
+        Set<String> mySetKeys = new HashSet<>();
+        for (int i = 0; i < intervals.length; i++) {
+            int[] current = intervals[i];
+            String key = Arrays.toString(current);
+            boolean added = mySetKeys.add(key);
+            if (added) {
+                int leftKey = current[0];
+                if (result.containsKey(leftKey)) {
+                    result.get(leftKey).add(current);
+                } else {
+                    List<int[]> newList = new ArrayList<>();
+                    newList.add(current);
+                    result.put(leftKey, newList);
+                }
+
+            }
+
+        }
+        return result;
+
+    }
+
+    public TreeMap<Integer, int[]> getMapCombinedIntervals(Map<Integer, List<int[]>> orderedMap) {
+        TreeMap<Integer, int[]> result = new TreeMap<>();
+        for (Integer key : orderedMap.keySet()) {
+            int leftKey = key;
+            List<int[]> list = orderedMap.get(leftKey);
+            int rightKey = list.get(0)[1];
+            for (int i = 0; i < list.size(); i++) {
+                int temp = list.get(i)[1];
+                if (temp > rightKey) {
+                    rightKey = temp;
+                }
+            }
+            int[] combined = {leftKey, rightKey};
+            result.put(leftKey, combined);
+
+
+        }
+
+        return result;
+    }
+
+    public List<int[]> getNotOverlappedIntervals(List<int[]> overlappedList) {
+        List<int[]> result = new ArrayList<>();
+        if (overlappedList.size() == 1) {
+            return overlappedList;
+        }
+        int[] previous = overlappedList.get(0);
+        for (int i = 0; i < overlappedList.size() - 1; i++) {
+            int[] current = overlappedList.get(i + 1);
+            if (isOverlapped(previous, current)) {
+                //combine new previous
+                int maxRightSide = previous[1] > current[1] ? previous[1] : current[1];
+                previous = new int[]{previous[0], maxRightSide};
+
+
+            } else {
+                //save previous into result list
+                result.add(previous);
+                previous = current;
+            }
+
+        }
+        result.add(previous);
+
+
+        return result;
+    }
+
+    public boolean isOverlapped(int[] previous, int[] current) {
+        if (current[0] > previous[1]) return false;
+        else return true;
+    }
+
+    public int[][] merge(int[][] intervals) {
+        Map<Integer, List<int[]>> mapIntervals = getMapIntervals(intervals);
+        TreeMap<Integer, int[]> combinedIntervals = getMapCombinedIntervals(mapIntervals);
+        List<int[]> overlappedList = new ArrayList<>();
+        for (Integer key : combinedIntervals.keySet()) {
+            System.out.println("key " + key + " value " + Arrays.toString(combinedIntervals.get(key)));
+            overlappedList.add(combinedIntervals.get(key));
+        }
+        List<int[]> notOverlappedIntervals = getNotOverlappedIntervals(overlappedList);
+        int[][] result = new int[notOverlappedIntervals.size()][];
+        for (int i = 0; i < notOverlappedIntervals.size(); i++) {
+            result[i] = notOverlappedIntervals.get(i);
+        }
+        return result;
+
+    }
+}
