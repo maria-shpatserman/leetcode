@@ -11,31 +11,79 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class SolutionList {
+    public
+    class SubPair {
+        ListNode end;
+        int length;
+    }
+
     public static void main(String[] args) {
         SolutionList s = new SolutionList();
-        ListNode l7 = new ListNode(9);
-        ListNode l6 = new ListNode(9);
+        ListNode l7 = new ListNode(7);
+        ListNode l6 = new ListNode(6);
         l6.setNext(l7);
-        ListNode l5 = new ListNode(9);
+        ListNode l5 = new ListNode(5);
         l5.setNext(l6);
-        ListNode l4 = new ListNode(8);
+        ListNode l4 = new ListNode(4);
         l4.setNext(l5);
-        ListNode l3 = new ListNode(7);
+        ListNode l3 = new ListNode(3);
         l3.setNext(l4);
-        ListNode l2 = new ListNode(6);
+        ListNode l2 = new ListNode(2);
         l2.setNext(l3);
-        ListNode l1 = new ListNode(5);
+        ListNode l1 = new ListNode(1);
         l1.setNext(l2);
         s.showAllElements(l1);
-//        ListNode node = s.reverseKGroup(l1, 3);
-//        System.out.println("SHOW RESULT >>>>------");
-//        s.showAllElements(node);
-        int[] nums = new int[]{1, 2, 3};
-        ListNode node = s.modifiedList(nums, l1);
-        s.showAllElements(node);
+        System.out.println("RESULT === >>>>====");
+
+        ListNode rotateRight = s.rotateRight(l1, 0);
+
+        s.showAllElements(rotateRight);
 
 
     }
+
+    public SubPair getCountAndEnd(ListNode head) {
+        ListNode current = head;
+        int length = 1;
+        while (current.getNext() != null) {
+            current = current.getNext();
+            length++;
+        }
+        SubPair result = new SubPair();
+        result.end = current;
+        result.length = length;
+
+        return result;
+
+    }
+
+    public ListNode rotateRight(ListNode head, int k) {
+        ListNode beginHead = head;
+        SubPair countAndEnd = getCountAndEnd(head);
+        int moveSteps;
+        if (k < countAndEnd.length) {
+            moveSteps = countAndEnd.length - k;
+        } else {
+            moveSteps = countAndEnd.length - (k % countAndEnd.length);
+        }
+        if (moveSteps == countAndEnd.length) {
+            return head;
+        }
+        int currentStep = 1;
+        while (currentStep < moveSteps) {
+            beginHead = beginHead.getNext();
+            currentStep++;
+        }
+        //end to head
+        countAndEnd.end.setNext(head);
+        //split between current step and next
+        ListNode result = beginHead.getNext();
+        beginHead.setNext(null);
+
+
+        return result;
+    }
+
 
     public ListNode getNewHead(Set<Integer> toRemove, ListNode head) {
         ListNode current = head;
@@ -56,23 +104,23 @@ public class SolutionList {
     public ListNode modifiedList(int[] nums, ListNode head) {
         Set<Integer> toRemove = Arrays.stream(nums).boxed().collect(Collectors.toSet());
         ListNode newHead = getNewHead(toRemove, head);
-        System.out.println("newHead value ="+newHead);
-        if(newHead!=null) {
+        System.out.println("newHead value =" + newHead);
+        if (newHead != null) {
             removeElements(toRemove, newHead);
         }
         return newHead;
     }
-    public ListNode removeElements(Set<Integer> toRemove, ListNode from){
+
+    public ListNode removeElements(Set<Integer> toRemove, ListNode from) {
         ListNode current = from;
-        while (current.getNext()!=null){
-            if(toRemove.contains(current.getNext().getVal())) {
+        while (current.getNext() != null) {
+            if (toRemove.contains(current.getNext().getVal())) {
                 ListNode temp = current.getNext();
                 ListNode end = temp.getNext();
                 current.setNext(end);
                 temp.setNext(null);
-            }
-            else {
-                current=current.getNext();
+            } else {
+                current = current.getNext();
             }
 
         }

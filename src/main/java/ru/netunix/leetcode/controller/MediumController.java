@@ -297,4 +297,15 @@ public class MediumController {
 
         return "task";
     }
+    @GetMapping("/getRotateList")
+    public String getRotateList(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getRotateList().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 61. Rotate List";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
+
 }
