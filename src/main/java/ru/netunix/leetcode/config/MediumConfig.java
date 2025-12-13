@@ -72,4 +72,6 @@ public class MediumConfig {
     private Resource mergeIntervals;
     @Value(value = "classpath:code/57_insert_interval.txt")
     private Resource insertIntervals;
+    @Value(value = "classpath:code/61_rotate_list.txt")
+    private Resource rotateList;
 }
