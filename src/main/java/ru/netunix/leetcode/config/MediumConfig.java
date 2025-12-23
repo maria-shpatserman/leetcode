@@ -74,4 +74,7 @@ public class MediumConfig {
     private Resource insertIntervals;
     @Value(value = "classpath:code/61_rotate_list.txt")
     private Resource rotateList;
+    @Value(value = "classpath:code/81_search_in_rotated_sorted_array_2.txt")
+    private Resource searchRotatedSortedArrayTwo;
+
 }

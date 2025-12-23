@@ -70,7 +70,40 @@ public class Solution {
             System.out.println("insertedAndMerged [" + i + "]=" + Arrays.toString(insertedAndMerged[i]));
         }
 
+        int[] nums = {6,7,8,9,0,1,2,3,4,5};
+        int target =5;
+        System.out.println("Result search = "+solution.search(nums,target));
 
+    }
+
+    public boolean search(int[] nums, int target) {
+        if (nums[0] == target) return true;
+        if (nums[0] < target) return findTargetNoRotation(0, nums, target);
+        return findTargetWithRotation(nums, target);
+
+    }
+
+    public boolean findTargetNoRotation(int headIndex, int[] nums, int target) {
+        int min = nums[headIndex];
+        for (int i = headIndex; i < nums.length; i++) {
+            if (nums[i] == target) return true;
+            if (nums[i] > target) return false;
+            if (nums[i] < min) return false;
+            min = nums[i];
+        }
+        return false;
+    }
+
+    public boolean findTargetWithRotation(int[] nums, int target) {
+        int min = nums[0];
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target) return true;
+            if (nums[i] < target) return findTargetNoRotation(i, nums, target);
+            if ((nums[i] < min) && (nums[i] > target)) return false;
+            min = nums[i];
+
+        }
+        return false;
     }
 
     public int[][] insert(int[][] intervals, int[] newInterval) {
