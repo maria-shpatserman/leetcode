@@ -307,5 +307,15 @@ public class MediumController {
 
         return "task";
     }
+    @GetMapping("/getSearchRotatedSortedArray")
+    public String getSearchRotatedSortedArray(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getSearchRotatedSortedArrayTwo().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 81. Search in Rotated Sorted Array II";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }
