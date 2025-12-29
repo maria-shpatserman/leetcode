@@ -317,5 +317,15 @@ public class MediumController {
 
         return "task";
     }
+    @GetMapping("/getRemoveDuplicatesFromSortedList")
+    public String getRemoveDuplicatesFromSortedList(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getRemoveDuplicatesFromSortedListTwo().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 82. Remove Duplicates from Sorted List II";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }

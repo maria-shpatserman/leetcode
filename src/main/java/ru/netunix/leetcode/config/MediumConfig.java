@@ -76,5 +76,7 @@ public class MediumConfig {
     private Resource rotateList;
     @Value(value = "classpath:code/81_search_in_rotated_sorted_array_2.txt")
     private Resource searchRotatedSortedArrayTwo;
+    @Value(value = "classpath:code/82_Remove_Duplicates_From_Sorted_List_2.txt")
+    private Resource removeDuplicatesFromSortedListTwo;
 
 }

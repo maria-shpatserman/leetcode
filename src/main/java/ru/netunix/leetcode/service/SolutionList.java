@@ -19,7 +19,7 @@ public class SolutionList {
 
     public static void main(String[] args) {
         SolutionList s = new SolutionList();
-        ListNode l7 = new ListNode(7);
+        ListNode l7 = new ListNode(6);
         ListNode l6 = new ListNode(6);
         l6.setNext(l7);
         ListNode l5 = new ListNode(5);
@@ -28,16 +28,67 @@ public class SolutionList {
         l4.setNext(l5);
         ListNode l3 = new ListNode(3);
         l3.setNext(l4);
-        ListNode l2 = new ListNode(2);
+        ListNode l2 = new ListNode(1);
         l2.setNext(l3);
         ListNode l1 = new ListNode(1);
         l1.setNext(l2);
         s.showAllElements(l1);
         System.out.println("RESULT === >>>>====");
 
-        ListNode rotateRight = s.rotateRight(l1, 0);
+//        ListNode rotateRight = s.rotateRight(l1, 0);
+//
+//        s.showAllElements(rotateRight);
+        ListNode node = s.deleteDuplicates(l1);
+        s.showAllElements(node);
 
-        s.showAllElements(rotateRight);
+
+    }
+
+    public ListNode deleteDuplicates(ListNode head) {
+        if ((head == null) || (head.getNext() == null)) return head;
+        ListNode newHead = getHead(head);
+        if(newHead == null) return  newHead;
+        removeDuplicates(newHead);
+        return newHead;
+
+    }
+
+    void removeDuplicates(ListNode head) {
+        ListNode previousNotDuplicate = head;
+        ListNode nextNotDuplicate = getNextNotDuplicate(previousNotDuplicate.getNext());
+        previousNotDuplicate.setNext(nextNotDuplicate);
+        previousNotDuplicate = nextNotDuplicate;
+        while (previousNotDuplicate!=null){
+            nextNotDuplicate = getNextNotDuplicate(previousNotDuplicate.getNext());
+            previousNotDuplicate.setNext(nextNotDuplicate);
+            previousNotDuplicate = nextNotDuplicate;
+        }
+
+
+    }
+    ListNode getNextNotDuplicate(ListNode startFrom){
+        if(startFrom == null) return startFrom;
+        if(startFrom.getNext() == null) return  startFrom;
+        int currentVal = startFrom.getVal();
+        if (currentVal != startFrom.getNext().getVal()) return startFrom;
+        ListNode current = startFrom;
+        while (current.getVal() == currentVal) {
+            current = current.getNext();
+            if (current == null) return null;
+        }
+        return getNextNotDuplicate(current);
+    }
+
+    public ListNode getHead(ListNode head) {
+        if (head.getNext() == null) return head;
+        int currentVal = head.getVal();
+        if (currentVal != head.getNext().getVal()) return head;
+        ListNode current = head;
+        while (current.getVal() == currentVal) {
+            current = current.getNext();
+            if (current == null) return null;
+        }
+        return getHead(current);
 
 
     }

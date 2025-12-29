@@ -1,0 +1,60 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+   public ListNode deleteDuplicates(ListNode head) {
+        if ((head == null) || (head.next == null)) return head;
+        ListNode newHead = getHead(head);
+        if(newHead == null) return  newHead;
+        removeDuplicates(newHead);
+        return newHead;
+
+    }
+
+    void removeDuplicates(ListNode head) {
+        ListNode previousNotDuplicate = head;
+        ListNode nextNotDuplicate = getNextNotDuplicate(previousNotDuplicate.next);
+        previousNotDuplicate.next = (nextNotDuplicate);
+        previousNotDuplicate = nextNotDuplicate;
+        while (previousNotDuplicate!=null){
+            nextNotDuplicate = getNextNotDuplicate(previousNotDuplicate.next);
+            previousNotDuplicate.next = (nextNotDuplicate);
+            previousNotDuplicate = nextNotDuplicate;
+        }
+
+
+    }
+    ListNode getNextNotDuplicate(ListNode startFrom){
+        if(startFrom == null) return startFrom;
+        if(startFrom.next == null) return  startFrom;
+        int currentVal = startFrom.val;
+        if (currentVal != startFrom.next.val) return startFrom;
+        ListNode current = startFrom;
+        while (current.val == currentVal) {
+            current = current.next;
+            if (current == null) return null;
+        }
+        return getNextNotDuplicate(current);
+    }
+
+    public ListNode getHead(ListNode head) {
+        if (head.next == null) return head;
+        int currentVal = head.val;
+        if (currentVal != head.next.val) return head;
+        ListNode current = head;
+        while (current.val == currentVal) {
+            current = current.next;
+            if (current == null) return null;
+        }
+        return getHead(current);
+
+
+    }
+}
