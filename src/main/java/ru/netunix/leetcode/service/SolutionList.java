@@ -19,7 +19,7 @@ public class SolutionList {
 
     public static void main(String[] args) {
         SolutionList s = new SolutionList();
-        ListNode l7 = new ListNode(6);
+        ListNode l7 = new ListNode(7);
         ListNode l6 = new ListNode(6);
         l6.setNext(l7);
         ListNode l5 = new ListNode(5);
@@ -28,7 +28,7 @@ public class SolutionList {
         l4.setNext(l5);
         ListNode l3 = new ListNode(3);
         l3.setNext(l4);
-        ListNode l2 = new ListNode(1);
+        ListNode l2 = new ListNode(2);
         l2.setNext(l3);
         ListNode l1 = new ListNode(1);
         l1.setNext(l2);
@@ -38,16 +38,55 @@ public class SolutionList {
 //        ListNode rotateRight = s.rotateRight(l1, 0);
 //
 //        s.showAllElements(rotateRight);
-        ListNode node = s.deleteDuplicates(l1);
+        ListNode node = s.reverseBetween(l1, 1, 7);
         s.showAllElements(node);
 
 
     }
 
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if (head.getNext() == null) return head;
+        if (left == right) return head;
+        ListNode previousLeftNode = null;
+        int currentIndex = 1;
+        ListNode previous = head;
+        while (currentIndex < left) {
+            previousLeftNode = previous;
+            previous = previous.getNext();
+            currentIndex++;
+        }
+        ListNode leftNode = previous;
+
+
+        ListNode current = leftNode;
+        previous = previousLeftNode;
+        while (currentIndex < right) {
+
+            ListNode next = current.getNext();
+            current.setNext(previous);
+            previous = current;
+            current = next;
+            currentIndex++;
+        }
+        ListNode rightNode = current;
+        ListNode afterRightNode = rightNode.getNext();
+        //if previousLeftNode is null - then right will be new head !
+        if (previousLeftNode == null) {
+            head = rightNode;
+        } else {
+            previousLeftNode.setNext(rightNode);
+        }
+        rightNode.setNext(previous);
+        leftNode.setNext(afterRightNode);
+
+
+        return head;
+    }
+
     public ListNode deleteDuplicates(ListNode head) {
         if ((head == null) || (head.getNext() == null)) return head;
         ListNode newHead = getHead(head);
-        if(newHead == null) return  newHead;
+        if (newHead == null) return newHead;
         removeDuplicates(newHead);
         return newHead;
 
@@ -58,7 +97,7 @@ public class SolutionList {
         ListNode nextNotDuplicate = getNextNotDuplicate(previousNotDuplicate.getNext());
         previousNotDuplicate.setNext(nextNotDuplicate);
         previousNotDuplicate = nextNotDuplicate;
-        while (previousNotDuplicate!=null){
+        while (previousNotDuplicate != null) {
             nextNotDuplicate = getNextNotDuplicate(previousNotDuplicate.getNext());
             previousNotDuplicate.setNext(nextNotDuplicate);
             previousNotDuplicate = nextNotDuplicate;
@@ -66,9 +105,10 @@ public class SolutionList {
 
 
     }
-    ListNode getNextNotDuplicate(ListNode startFrom){
-        if(startFrom == null) return startFrom;
-        if(startFrom.getNext() == null) return  startFrom;
+
+    ListNode getNextNotDuplicate(ListNode startFrom) {
+        if (startFrom == null) return startFrom;
+        if (startFrom.getNext() == null) return startFrom;
         int currentVal = startFrom.getVal();
         if (currentVal != startFrom.getNext().getVal()) return startFrom;
         ListNode current = startFrom;

@@ -79,4 +79,6 @@ public class MediumConfig {
     @Value(value = "classpath:code/82_Remove_Duplicates_From_Sorted_List_2.txt")
     private Resource removeDuplicatesFromSortedListTwo;
 
+    @Value(value = "classpath:code/92_reverse_linked_list_two.txt")
+    private Resource reverseLinkedListTwo;
 }

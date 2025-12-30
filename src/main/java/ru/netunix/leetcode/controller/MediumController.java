@@ -327,5 +327,15 @@ public class MediumController {
 
         return "task";
     }
+    @GetMapping("/getReverseLinkedListTwo")
+    public String getReverseLinkedListTwo(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getReverseLinkedListTwo().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 92. Reverse Linked List II";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 }
