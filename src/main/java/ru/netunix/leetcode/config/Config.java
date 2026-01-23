@@ -51,15 +51,8 @@ public class Config {
 
     @Value(value = "classpath:code/112_path_sum.txt")
     private Resource pathSum;
-
-
-
-
-
-
-
-
-
+    @Value(value = "classpath:code/206_reverse_linked_list.txt")
+    private Resource reverseLinkedList;
 
 
 }

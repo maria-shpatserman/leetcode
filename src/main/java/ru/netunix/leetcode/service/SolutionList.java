@@ -38,9 +38,27 @@ public class SolutionList {
 //        ListNode rotateRight = s.rotateRight(l1, 0);
 //
 //        s.showAllElements(rotateRight);
-        ListNode node = s.reverseBetween(l1, 1, 7);
-        s.showAllElements(node);
+//        ListNode node = s.reverseBetween(l1, 1, 7);
+        s.showAllElements(l1);
+        ListNode reverseList = s.reverseList(l1);
+        s.showAllElements(reverseList);
 
+
+    }
+    public ListNode reverseList(ListNode head) {
+        if(head == null) return null;
+        if(head.getNext()==null) return head;
+        ListNode previous = null;
+        ListNode current = head;
+        while(current.getNext() !=null){
+            System.out.println("CURRENT = "+current.getVal());
+            ListNode next = current.getNext();
+            current.setNext(previous);
+            previous = current;
+            current = next;
+        }
+        current.setNext(previous);
+        return current;
 
     }
 
