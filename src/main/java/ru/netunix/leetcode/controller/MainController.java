@@ -224,6 +224,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/reverseLinkedList")
+    public String getReverseLinkedList(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getReverseLinkedList().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 206. Reverse Linked List";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 
 
