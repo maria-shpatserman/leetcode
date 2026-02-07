@@ -234,6 +234,16 @@ public class MainController {
 
         return "task";
     }
+    @GetMapping("/intersectionLinkedLists")
+    public String getIntersectionLinkedLists(Model model) throws IOException {
+        String code = StreamUtils.copyToString(configuration.getIntersectionLinkedLists().getInputStream(), Charset.defaultCharset());
+        model.addAttribute("code", code);
+        //taskName
+        String taskName = "Task 160. Intersection of Two Linked Lists";
+        model.addAttribute("taskName", taskName);
+
+        return "task";
+    }
 
 
 

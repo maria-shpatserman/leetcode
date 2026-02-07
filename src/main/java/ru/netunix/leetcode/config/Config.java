@@ -54,5 +54,8 @@ public class Config {
     @Value(value = "classpath:code/206_reverse_linked_list.txt")
     private Resource reverseLinkedList;
 
+    @Value(value = "classpath:code/160_intersection_of_two_linked_lists.txt")
+    private Resource intersectionLinkedLists;
+
 
 }
