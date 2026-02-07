@@ -5,8 +5,10 @@ import ru.netunix.leetcode.util.ListNode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,26 +34,61 @@ public class SolutionList {
         l2.setNext(l3);
         ListNode l1 = new ListNode(1);
         l1.setNext(l2);
+        System.out.println("head A === >>>>====");
         s.showAllElements(l1);
+
+        System.out.println("head B === >>>>====");
+        ListNode h1 = new ListNode(8);
+
+        ListNode h2 = new ListNode(10);
+        h1.setNext(h2);
+//        h2.setNext(l3);
+
+        s.showAllElements(h1);
+
         System.out.println("RESULT === >>>>====");
 
 //        ListNode rotateRight = s.rotateRight(l1, 0);
 //
 //        s.showAllElements(rotateRight);
 //        ListNode node = s.reverseBetween(l1, 1, 7);
-        s.showAllElements(l1);
-        ListNode reverseList = s.reverseList(l1);
-        s.showAllElements(reverseList);
+//        ListNode reverseList = s.reverseList(l1);
+//        s.showAllElements(reverseList);
+        ListNode headA = l1;
+        ListNode headB = h1;
+        ListNode result = s.getIntersectionNode(headA, headB);
+        s.showAllElements(result);
 
 
     }
+
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null) return null;
+        if (headB == null) return null;
+        Set<ListNode> nodes = new HashSet<>();
+        ListNode current = headA;
+        while (current.getNext() != null) {
+            nodes.add(current);
+            current = current.getNext();
+        }
+        nodes.add(current);
+        current = headB;
+        while (current.getNext() != null) {
+            if (nodes.contains(current)) return current;
+            current = current.getNext();
+        }
+        if (nodes.contains(current)) return current;
+        return null;
+
+    }
+
     public ListNode reverseList(ListNode head) {
-        if(head == null) return null;
-        if(head.getNext()==null) return head;
+        if (head == null) return null;
+        if (head.getNext() == null) return head;
         ListNode previous = null;
         ListNode current = head;
-        while(current.getNext() !=null){
-            System.out.println("CURRENT = "+current.getVal());
+        while (current.getNext() != null) {
+            System.out.println("CURRENT = " + current.getVal());
             ListNode next = current.getNext();
             current.setNext(previous);
             previous = current;
